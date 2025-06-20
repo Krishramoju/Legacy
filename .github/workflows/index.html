@@ -1588,6 +1588,145 @@
 
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Tools Marketplace Feedback (View Only)</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      padding: 30px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    form {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #2980b9;
+      margin-top: 30px;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: 500;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 1em;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .rating {
+      display: flex;
+      gap: 10px;
+      margin-top: 5px;
+    }
+    .rating label {
+      font-weight: normal;
+    }
+    button {
+      margin-top: 30px;
+      background: #aaa;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: not-allowed;
+    }
+    .note {
+      font-size: 0.9em;
+      color: #999;
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>AI Tools Marketplace – Feedback Form (View Only)</h1>
+
+  <form>
+    <!-- Section: General Info -->
+    <label for="name">Your Name</label>
+    <input type="text" id="name" placeholder="Name" readonly>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="Email" readonly>
+
+    <!-- Section: Computer Science Tools -->
+    <h2>Computer Science AI Tools</h2>
+
+    <label>How would you rate the technical accuracy?</label>
+    <div class="rating">
+      <label><input type="radio" name="cs_accuracy" disabled> 1</label>
+      <label><input type="radio" name="cs_accuracy" disabled> 2</label>
+      <label><input type="radio" name="cs_accuracy" disabled> 3</label>
+      <label><input type="radio" name="cs_accuracy" disabled> 4</label>
+      <label><input type="radio" name="cs_accuracy" disabled> 5</label>
+    </div>
+
+    <label>Suggestions to improve CS tools:</label>
+    <textarea readonly placeholder="Enter your suggestions..."></textarea>
+
+    <!-- Section: Economics Tools -->
+    <h2>Economics AI Tools</h2>
+
+    <label>How would you rate the relevance of economic models used?</label>
+    <div class="rating">
+      <label><input type="radio" name="econ_relevance" disabled> 1</label>
+      <label><input type="radio" name="econ_relevance" disabled> 2</label>
+      <label><input type="radio" name="econ_relevance" disabled> 3</label>
+      <label><input type="radio" name="econ_relevance" disabled> 4</label>
+      <label><input type="radio" name="econ_relevance" disabled> 5</label>
+    </div>
+
+    <label>Suggestions to improve Economic tools:</label>
+    <textarea readonly placeholder="Enter your suggestions..."></textarea>
+
+    <!-- Section: Overall Experience -->
+    <h2>Overall Experience</h2>
+
+    <label>How satisfied are you with the marketplace platform?</label>
+    <select disabled>
+      <option>Very Satisfied</option>
+      <option>Satisfied</option>
+      <option>Neutral</option>
+      <option>Dissatisfied</option>
+      <option>Very Dissatisfied</option>
+    </select>
+
+    <label>Any additional feedback?</label>
+    <textarea readonly placeholder="Share any other thoughts..."></textarea>
+
+    <!-- Disabled Submit Button -->
+    <button type="submit" disabled>Submit Feedback</button>
+    <div class="note">(Form is view-only. Submission is disabled.)</div>
+  </form>
+
+</body>
+</html>
 
 
 
