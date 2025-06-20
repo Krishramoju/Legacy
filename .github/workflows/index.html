@@ -575,8 +575,141 @@
 // how do underwater robots navigate
 // how to handle biofouling on sensors
 
+<section id="construction-chatbot">
+  <h2>🏗️ Construction Project Assistant Bot</h2>
+  <p>Use this assistant for structural choices, material selection, safety standards, estimation, and modern building techniques.</p>
 
-    
+  <div id="construction-chatbox">
+    <div id="construction-log"></div>
+    <form id="construction-form">
+      <input type="text" id="construction-input" placeholder="Ask about concrete grades, steel types, load capacity..." required />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</section>
+
+<style>
+  #construction-chatbot {
+    background: #fdfdfd;
+    border-top: 2px solid #bbb;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  #construction-chatbox {
+    max-width: 650px;
+    margin: auto;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  #construction-log {
+    height: 320px;
+    overflow-y: auto;
+    background: #f4f4f4;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+  }
+
+  .construction-msg {
+    margin: 8px 0;
+    padding: 10px 14px;
+    border-radius: 10px;
+    max-width: 80%;
+  }
+
+  .construction-user {
+    background-color: #e0f7fa;
+    float: right;
+    text-align: right;
+    clear: both;
+  }
+
+  .construction-bot {
+    background-color: #e8f5e9;
+    float: left;
+    text-align: left;
+    clear: both;
+  }
+
+  #construction-input {
+    width: 78%;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+  }
+
+  #construction-form button {
+    padding: 10px 16px;
+    background-color: #8d6e63;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  #construction-form button:hover {
+    background-color: #5d4037;
+  }
+</style>
+
+<script>
+  const constructionResponses = {
+    "what is m25 grade concrete": "M25 grade concrete has a characteristic compressive strength of 25 MPa. It’s typically used in reinforced concrete for moderate loads.",
+    "what is the difference between rcc and pcc": "RCC (Reinforced Cement Concrete) contains steel reinforcement bars, while PCC (Plain Cement Concrete) does not. RCC is used in structural elements.",
+    "what are common foundation types": "Common types include shallow foundation (spread footing), deep foundation (pile, caisson), raft foundation, and mat foundation — based on soil and load.",
+    "how to calculate load bearing wall thickness": "Wall thickness depends on height, load, and material. A basic rule is 230mm for up to 2 floors using brick. Use structural formulas for precision.",
+    "what is the standard steel grade for beams": "Fe500 and Fe550 TMT steel bars are common for beams and columns due to high strength and ductility.",
+    "how to estimate construction cost": "Multiply built-up area × cost per sq.ft. Factor in material, labor, equipment, location, and contingency. Use quantity takeoffs from drawings for accuracy.",
+    "what is bim": "Building Information Modeling (BIM) is a digital representation of the physical and functional characteristics of a facility — supports 3D models, time, cost, and scheduling.",
+    "how to prevent foundation settlement": "Use soil compaction, proper drainage, pile foundation for poor soils, and ensure load is distributed evenly via base pads or rafts.",
+    "difference between load bearing and frame structure": "Load-bearing structures rely on walls to carry loads, while framed structures transfer loads through beams and columns, allowing more open space.",
+    "what are common construction safety standards": "Follow OSHA or IS codes. Use PPE, secure scaffolding, conduct site inspections, ensure proper signage, and train workers in emergency procedures."
+  };
+
+  document.getElementById('construction-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const input = document.getElementById('construction-input');
+    const message = input.value.trim();
+    if (!message) return;
+
+    const log = document.getElementById('construction-log');
+
+    const userMsg = document.createElement('div');
+    userMsg.className = 'construction-msg construction-user';
+    userMsg.textContent = message;
+    log.appendChild(userMsg);
+
+    const prompt = message.toLowerCase();
+    const match = Object.keys(constructionResponses).find(key => prompt.includes(key));
+    const response = match ? constructionResponses[match] : "Try asking about concrete grades, steel types, cost estimation, BIM, or safety protocols.";
+
+    const botMsg = document.createElement('div');
+    botMsg.className = 'construction-msg construction-bot';
+    botMsg.textContent = response;
+    log.appendChild(botMsg);
+
+    log.scrollTop = log.scrollHeight;
+    input.value = '';
+  });
+</script>
+
+
+ // what is m25 grade concrete
+// what is the difference between rcc and pcc
+// what are common foundation types
+// how to calculate load bearing wall thickness
+// what is the standard steel grade for beams
+// how to estimate construction cost
+// what is bim
+// how to prevent foundation settlement
+// difference between load bearing and frame structure
+// what are common construction safety standards
+   
 
 <!DOCTYPE html>
 <html lang="en">
