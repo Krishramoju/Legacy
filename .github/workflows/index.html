@@ -3896,3 +3896,171 @@ Let me know if you want 10+ prompts per mode — I can expand it accordingly.
 
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multi-Bot AI Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f0f2f5;
+    }
+    h1 {
+      text-align: center;
+      padding: 1rem;
+      background-color: #2c3e50;
+      color: white;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .bot-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    textarea {
+      width: 100%;
+      height: 60px;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    button {
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .response {
+      background: #ecf0f1;
+      padding: 0.5rem;
+      border-radius: 5px;
+      margin-top: 0.5rem;
+      min-height: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>AI Tool Bots</h1>
+<div class="container">
+
+  <!-- 🎓 Education Bot -->
+  <div class="bot-card">
+    <h2>🎓 Education Tutor</h2>
+    <!-- Prompts supported:
+         "Explain Newton’s Second Law"
+         "What is Pythagoras Theorem?"
+         "Help with derivatives"
+    -->
+    <textarea id="edu-input" placeholder="Ask your education question..."></textarea>
+    <button onclick="eduRespond()">Ask</button>
+    <div class="response" id="edu-response"></div>
+  </div>
+
+  <!-- ⚕️ Healthcare Bot -->
+  <div class="bot-card">
+    <h2>⚕️ Healthcare AI</h2>
+    <!-- Prompts supported:
+         "I have a sore throat"
+         "Symptoms of diabetes"
+         "Latest news on COVID-19"
+    -->
+    <textarea id="health-input" placeholder="Describe your symptoms or question..."></textarea>
+    <button onclick="healthRespond()">Ask</button>
+    <div class="response" id="health-response"></div>
+  </div>
+
+  <!-- ⚖️ Legal Bot -->
+  <div class="bot-card">
+    <h2>⚖️ Legal Advisor</h2>
+    <!-- Prompts supported:
+         "Can I break a rental lease?"
+         "AI regulation in EU"
+         "What is my right to privacy?"
+    -->
+    <textarea id="legal-input" placeholder="Ask about laws, rights, or contracts..."></textarea>
+    <button onclick="legalRespond()">Ask</button>
+    <div class="response" id="legal-response"></div>
+  </div>
+
+  <!-- ⚡ Green Tech Bot -->
+  <div class="bot-card">
+    <h2>⚡ Green Tech Helper</h2>
+    <!-- Prompts supported:
+         "What is carbon footprint?"
+         "Tools to track energy usage"
+         "Sustainability tips for homes"
+    -->
+    <textarea id="green-input" placeholder="Ask about sustainability or climate..."></textarea>
+    <button onclick="greenRespond()">Ask</button>
+    <div class="response" id="green-response"></div>
+  </div>
+
+</div>
+
+<script>
+  function matchPrompt(input, patterns) {
+    input = input.toLowerCase();
+    for (let p of patterns) {
+      if (input.includes(p.keyword)) {
+        return p.response;
+      }
+    }
+    return "❓ Sorry, I couldn’t understand that. Please try a different question.";
+  }
+
+  function eduRespond() {
+    const input = document.getElementById("edu-input").value;
+    const patterns = [
+      { keyword: "newton", response: "Newton’s Second Law states that Force = Mass × Acceleration." },
+      { keyword: "pythagoras", response: "The Pythagorean Theorem is a² + b² = c² for right-angled triangles." },
+      { keyword: "derivatives", response: "Derivatives measure how a function changes as its input changes." }
+    ];
+    document.getElementById("edu-response").innerText = matchPrompt(input, patterns);
+  }
+
+  function healthRespond() {
+    const input = document.getElementById("health-input").value;
+    const patterns = [
+      { keyword: "sore throat", response: "A sore throat may indicate a viral infection. Stay hydrated and rest." },
+      { keyword: "diabetes", response: "Symptoms of diabetes include excessive thirst, frequent urination, and fatigue." },
+      { keyword: "covid", response: "Recent COVID-19 variants show higher transmissibility but lower severity." }
+    ];
+    document.getElementById("health-response").innerText = matchPrompt(input, patterns);
+  }
+
+  function legalRespond() {
+    const input = document.getElementById("legal-input").value;
+    const patterns = [
+      { keyword: "rental lease", response: "Breaking a lease depends on your state's laws. Early termination fees may apply." },
+      { keyword: "ai regulation", response: "The EU AI Act classifies AI risk levels and governs development accordingly." },
+      { keyword: "privacy", response: "You have the right to control personal data under many national privacy laws like GDPR." }
+    ];
+    document.getElementById("legal-response").innerText = matchPrompt(input, patterns);
+  }
+
+  function greenRespond() {
+    const input = document.getElementById("green-input").value;
+    const patterns = [
+      { keyword: "carbon footprint", response: "A carbon footprint measures CO₂ emissions caused by activities or consumption." },
+      { keyword: "energy usage", response: "Smart meters and apps like EnergyHub help track and reduce electricity use." },
+      { keyword: "sustainability", response: "Tips: Use LED bulbs, reduce meat consumption, and install solar panels if possible." }
+    ];
+    document.getElementById("green-response").innerText = matchPrompt(input, patterns);
+  }
+</script>
+
+</body>
+</html>
+
