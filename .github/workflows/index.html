@@ -2029,3 +2029,116 @@
 </body>
 </html>
 </div> 
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cybersecurity Community Forum</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .card {
+      background: #fff;
+      padding: 15px;
+      margin: 15px auto;
+      max-width: 800px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    input, textarea, button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 1em;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background-color: #1a242f;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Community Forum</h1>
+
+  <section id="community">
+    <h2>Join security professionals in discussing tools, incidents, and best practices.</h2>
+
+    <!-- New Discussion Form -->
+    <div class="card">
+      <h3>Start a New Discussion</h3>
+      <input type="text" id="topicTitle" placeholder="Discussion title (e.g., Best AI tools for malware analysis)" required>
+      <textarea id="topicContent" rows="4" placeholder="Your comment or thoughts..." required></textarea>
+      <input type="text" id="username" placeholder="Your name or alias (e.g., NetNinja77)" required>
+      <button onclick="addDiscussion()">Submit Discussion</button>
+    </div>
+
+    <!-- Existing Discussions Appear Here -->
+    <div id="discussionList"></div>
+
+  </section>
+
+  <script>
+    // Load existing discussions from localStorage
+    function loadDiscussions() {
+      const discussions = JSON.parse(localStorage.getItem('cyberDiscussions')) || [];
+      const listDiv = document.getElementById('discussionList');
+      listDiv.innerHTML = '';
+
+      discussions.forEach(d => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <h3>Discussion: ${d.title}</h3>
+          <p><strong>${d.user}:</strong> ${d.content}</p>
+        `;
+        listDiv.appendChild(card);
+      });
+    }
+
+    // Add a new discussion and save to localStorage
+    function addDiscussion() {
+      const title = document.getElementById('topicTitle').value.trim();
+      const content = document.getElementById('topicContent').value.trim();
+      const user = document.getElementById('username').value.trim();
+
+      if (title && content && user) {
+        const newDiscussion = { title, content, user };
+        const discussions = JSON.parse(localStorage.getItem('cyberDiscussions')) || [];
+        discussions.push(newDiscussion);
+        localStorage.setItem('cyberDiscussions', JSON.stringify(discussions));
+
+        // Clear input fields
+        document.getElementById('topicTitle').value = '';
+        document.getElementById('topicContent').value = '';
+        document.getElementById('username').value = '';
+
+        loadDiscussions(); // Refresh list
+      } else {
+        alert('Please fill in all fields.');
+      }
+    }
+
+    // Load stored discussions on page load
+    window.onload = loadDiscussions;
+  </script>
+
+</body>
+</html>
