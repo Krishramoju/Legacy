@@ -1,3 +1,31 @@
+<script>
+    function signIn() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Dummy login check (you can change credentials)
+      if (username === 'user' && password === 'pass') {
+        document.getElementById('login-page').style.display = 'none';
+        document.getElementById('full-content').style.display = 'block';
+      } else {
+        alert('Incorrect username or password!');
+      }
+    }
+  </script>
+
+<div id="login-page">
+  <h1> Sign in to View the AI Marketplace </h1>
+  <label> Username: </label> <br>
+  <input type = "text" id = "username" placeholder = " enter username " > <br> <br> 
+
+  <label> Password: </label> <br> 
+  <input type = "password" id = " password " placeholder = " enter password " > <br> <br> 
+
+  <button onclick = "signIn() "> Sign In </button>
+</div> 
+
+
+<div id ="full-content" style = "display:none;"> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1935,4 +1963,4 @@
 
 </body>
 </html>
-
+</div> 
