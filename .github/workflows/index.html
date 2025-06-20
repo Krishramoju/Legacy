@@ -1817,41 +1817,37 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Design Your AI Bot – View Only</title>
+  <title>Design Your AI Bot – Submit and Store</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial, sans-serif;
       background: #f2f2f2;
       padding: 30px;
-      color: #333;
     }
     form {
       background: #fff;
-      padding: 25px;
-      border-radius: 12px;
+      padding: 20px;
+      border-radius: 10px;
       max-width: 800px;
       margin: auto;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    h1 {
-      text-align: center;
-      color: #2c3e50;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     label {
       display: block;
-      margin-top: 20px;
-      font-weight: 500;
+      margin-top: 15px;
+      font-weight: bold;
     }
     input[type="text"],
     textarea,
     select {
       width: 100%;
       padding: 10px;
+      margin-top: 5px;
       font-size: 1em;
       border: 1px solid #ccc;
       border-radius: 6px;
@@ -1859,57 +1855,81 @@
     }
     textarea {
       min-height: 100px;
-      resize: vertical;
     }
     button {
-      margin-top: 30px;
-      background: #aaa;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
       color: white;
-      padding: 12px 25px;
       border: none;
       border-radius: 6px;
+      cursor: pointer;
       font-size: 1em;
-      cursor: not-allowed;
     }
-    .note {
-      font-size: 0.9em;
-      color: #777;
-      text-align: center;
-      margin-top: 10px;
+    #message {
+      margin-top: 15px;
+      color: green;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-  <h1>Design Your Own AI Bot (View Only)</h1>
+  <h1 style="text-align:center;">Design Your Own AI Bot</h1>
 
-  <form>
-    <label for="bot-name">Bot Name</label>
-    <input type="text" id="bot-name" placeholder="e.g., CodeCompanion, EconInsight" readonly>
+  <form id="botForm">
+    <label for="botName">Bot Name</label>
+    <input type="text" id="botName" required placeholder="e.g., CodeCompanion, EconInsight">
 
-    <label for="bot-domain">Which domain does it target?</label>
-    <select id="bot-domain" disabled>
-      <option>Computer Science</option>
-      <option>Economics</option>
-      <option>Both</option>
+    <label for="botDomain">Which domain does it target?</label>
+    <select id="botDomain" required>
+      <option value="">-- Select Domain --</option>
+      <option value="Computer Science">Computer Science</option>
+      <option value="Economics">Economics</option>
+      <option value="Both">Both</option>
     </select>
 
-    <label for="bot-purpose">What problem does this bot solve?</label>
-    <textarea id="bot-purpose" readonly placeholder="Describe the key issue or task this bot addresses..."></textarea>
+    <label for="botPurpose">What problem does this bot solve?</label>
+    <textarea id="botPurpose" required placeholder="Describe the key issue or task this bot addresses..."></textarea>
 
-    <label for="bot-features">What are its key features?</label>
-    <textarea id="bot-features" readonly placeholder="Mention functionality, automation, algorithms used, etc."></textarea>
+    <label for="botFeatures">What are its key features?</label>
+    <textarea id="botFeatures" required placeholder="Mention functionality, automation, algorithms used, etc."></textarea>
 
-    <label for="bot-users">Who are the intended users?</label>
-    <input type="text" id="bot-users" placeholder="e.g., Students, Researchers, Policy Makers" readonly>
+    <label for="botUsers">Who are the intended users?</label>
+    <input type="text" id="botUsers" required placeholder="e.g., Students, Researchers, Policy Makers">
 
-    <button type="submit" disabled>Submit Bot Idea</button>
-    <div class="note">(This form is for viewing purposes only. Submission is disabled.)</div>
+    <button type="submit">Submit Bot Idea</button>
+    <div id="message"></div>
   </form>
+
+  <script>
+    document.getElementById('botForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Collect form data
+      const botData = {
+        name: document.getElementById('botName').value,
+        domain: document.getElementById('botDomain').value,
+        purpose: document.getElementById('botPurpose').value,
+        features: document.getElementById('botFeatures').value,
+        users: document.getElementById('botUsers').value
+      };
+
+      // Store in localStorage
+      let existing = JSON.parse(localStorage.getItem('submittedBots')) || [];
+      existing.push(botData);
+      localStorage.setItem('submittedBots', JSON.stringify(existing));
+
+      // Confirmation message
+      document.getElementById('message').textContent = "✅ Your bot idea has been saved!";
+      
+      // Clear form
+      document.getElementById('botForm').reset();
+    });
+  </script>
 
 </body>
 </html>
-
 
 
 
