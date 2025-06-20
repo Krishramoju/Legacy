@@ -4313,3 +4313,58 @@ Let me know if you want 10+ prompts per mode — I can expand it accordingly.
 </body>
 </html>
 
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><title>AI Data Syncer</title><style>#dataStorage{display:none;}body{font-family:sans-serif;padding:20px;}</style></head>
+<body>
+<h2>AI Data Sync Active</h2><p>Fetching live data in background...</p>
+<div id="dataStorage">
+  <div id="cybersecurity-data"></div>
+  <div id="construction-data"></div>
+  <div id="deepsea-data"></div>
+  <div id="space-data"></div>
+  <div id="uiux-data"></div>
+  <div id="news-data"></div>
+  <div id="stock-data"></div>
+</div>
+<script>
+  const fetchIntervals = {
+    cybersecurity: 60000,
+    construction: 300000,
+    deepsea: 300000,
+    space: 120000,
+    uiux: 300000,
+    news: 60000,
+    stock: 60000
+  };
+
+  const apiEndpoints = {
+    cybersecurity: 'https://pulsedive.com/api/?indicator=recent&format=json', // free Pulsedive
+    construction: 'https://us.constructiononline.com/api/projects',           // requires API key & account
+    deepsea: 'https://www.ngdc.noaa.gov/mgg/oceanexplorer/rest/services',     // public USGS/NOAA endpoint
+    space: 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY',
+    uiux: 'https://api.rss2json.com/v1/api.json?rss_url=https://uxdesign.cc/feed',
+    news: 'https://newsapi.org/v2/top-headlines?category=business&apiKey=YOUR_NEWSAPI_KEY',
+    stock: 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=YOUR_ALPHA_KEY'
+  };
+
+  function fetchAndStore(mode) {
+    fetch(apiEndpoints[mode])
+      .then(res => res.json())
+      .then(data =>
+        document.getElementById(`${mode}-data`).innerText = JSON.stringify(data)
+      )
+      .catch(err => console.error(`Error ${mode}:`, err));
+  }
+
+  function startSync() {
+    for (let mode in fetchIntervals) {
+      fetchAndStore(mode);
+      setInterval(() => fetchAndStore(mode), fetchIntervals[mode]);
+    }
+  }
+
+  window.onload = startSync;
+</script>
+</body>
+</html>
