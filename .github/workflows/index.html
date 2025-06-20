@@ -26,6 +26,153 @@
 
 
 <div id ="full-content" style = "display:none;"> 
+
+
+<section id="chatbot">
+  <h2>Try the Cybersecurity Assistant Bot</h2>
+  <p>Ask the assistant about vulnerabilities, threat reports, compliance, phishing detection, or patch advice. Type a prompt below to simulate a response.</p>
+
+  <div id="chatbox">
+    <div id="chatlog"></div>
+    <form id="chat-form">
+      <input type="text" id="chat-input" placeholder="Type your prompt here..." required />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</section>
+
+<style>
+  #chatbot {
+    background: #fff;
+    border-top: 2px solid #ccc;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  #chatbox {
+    max-width: 600px;
+    margin: auto;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 15px;
+    background: #f9f9f9;
+  }
+
+  #chatlog {
+    height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    background: #fff;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+  }
+
+  .message {
+    margin: 8px 0;
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 80%;
+  }
+
+  .user {
+    background-color: #d6f5d6;
+    align-self: flex-end;
+    text-align: right;
+    float: right;
+    clear: both;
+  }
+
+  .bot {
+    background-color: #e6e6ff;
+    text-align: left;
+    float: left;
+    clear: both;
+  }
+
+  #chat-input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+  }
+
+  #chat-form button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #0077cc;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  #chat-form button:hover {
+    background-color: #005fa3;
+  }
+</style>
+
+<script>
+  const botResponses = {
+    "summarize firewall breach logs": "Detected 37 intrusion attempts from blacklisted IPs. Top target ports: 443, 3389.",
+    "suggest remediation actions": "Block offending IPs, update firewall rules, and audit recent patch history.",
+    "are we gdpr compliant": "No. Consent is not documented. Recommend implementing a user consent banner with opt-in logging.",
+    "analyze suspicious email": "Phishing attempt detected. Spoofed domain, urgent language, and malicious link redirect.",
+    "scan internal servers for cve-2024-1357": "Found 3 affected Ubuntu 22.04 hosts missing patch. Critical RCE vulnerability confirmed.",
+    "automate incident triage": "Created SOAR workflow: collect alert → enrich with threat intel → auto-quarantine endpoint if IOC is confirmed.",
+    "simulate a sql injection": "Payload `admin' OR '1'='1` bypassed auth filter. Login vulnerable. Alert issued.",
+    "monitor dns queries": "Suspicious TXT record activity detected from host 192.168.22.15 using DNS tunneling technique.",
+    "get latest iocs for lockbit": "Retrieved SHA256 hashes, IPs, and filenames. IOC set last updated 3 hours ago via AlienVault OTX + MISP.",
+    "monitor user behavior": "User j.doe downloaded 4GB of files at 2 AM. Unusual access to HR folders.",
+    "what critical patches": "19 endpoints missing April 2025 Microsoft KB5028927 security rollup. Priority: Critical.",
+    "recommend rollout plan": "Stage patch by device group. Rollout over 72 hours with rollback plan for mission-critical systems.",
+    "which playbooks are triggered for ransomware": "“Ransomware-Containment.v1” and “EDR-Isolation-Protocol.v3”.",
+    "recommend user awareness action": "Alert employees via Slack. Conduct training on identifying spear phishing tactics."
+  };
+
+  document.getElementById('chat-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const input = document.getElementById('chat-input');
+    const message = input.value.trim();
+    if (!message) return;
+
+    const chatlog = document.getElementById('chatlog');
+
+    const userMsg = document.createElement('div');
+    userMsg.className = 'message user';
+    userMsg.textContent = message;
+    chatlog.appendChild(userMsg);
+
+    const lowerPrompt = message.toLowerCase();
+    const response = Object.keys(botResponses).find(key => lowerPrompt.includes(key));
+    const botMsg = document.createElement('div');
+    botMsg.className = 'message bot';
+    botMsg.textContent = response ? botResponses[response] : "I'm sorry, I don't have a response for that prompt. Try asking about breaches, compliance, phishing, or patching.";
+    chatlog.appendChild(botMsg);
+
+    chatlog.scrollTop = chatlog.scrollHeight;
+    input.value = '';
+  });
+</script>
+
+// ✅ List of available prompts (as comments in code):
+// summarize firewall breach logs
+// suggest remediation actions
+// are we gdpr compliant
+// analyze suspicious email
+// scan internal servers for cve-2024-1357
+// automate incident triage
+// simulate a sql injection
+// monitor dns queries
+// get latest iocs for lockbit
+// monitor user behavior
+// what critical patches are pending
+// recommend rollout plan
+// which playbooks are triggered for ransomware
+// recommend user awareness action
+
+    
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
