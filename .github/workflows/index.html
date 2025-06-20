@@ -171,6 +171,140 @@
 // recommend user awareness action
 
     
+<section id="uiux-chatbot">
+  <h2>Try the UI/UX Design Assistant Bot</h2>
+  <p>Ask about layout best practices, color palettes, user flow, accessibility, or UI tools like Figma. Get fast feedback on frontend design questions.</p>
+
+  <div id="uiux-chatbox">
+    <div id="uiux-log"></div>
+    <form id="uiux-form">
+      <input type="text" id="uiux-input" placeholder="Ask about design systems, button styles, mobile UX..." required />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</section>
+
+<style>
+  #uiux-chatbot {
+    background: #ffffff;
+    border-top: 2px solid #ddd;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  #uiux-chatbox {
+    max-width: 600px;
+    margin: auto;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 15px;
+    background: #fefefe;
+  }
+
+  #uiux-log {
+    height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    background: #fafafa;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+  }
+
+  .uiux-msg {
+    margin: 8px 0;
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 80%;
+  }
+
+  .uiux-user {
+    background-color: #ffe0b2;
+    float: right;
+    text-align: right;
+    clear: both;
+  }
+
+  .uiux-bot {
+    background-color: #dceefb;
+    float: left;
+    text-align: left;
+    clear: both;
+  }
+
+  #uiux-input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+  }
+
+  #uiux-form button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #0066cc;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  #uiux-form button:hover {
+    background-color: #004c99;
+  }
+</style>
+
+<script>
+  const uiuxResponses = {
+    "what is a good color scheme for dark mode": "Use deep gray or black (#121212), with accent colors like teal, purple, or neon green for emphasis. Ensure at least 4.5:1 contrast for accessibility.",
+    "difference between figma and sketch": "Figma is web-based and great for real-time collaboration. Sketch is macOS-only but has a strong plugin ecosystem.",
+    "how to improve mobile ux": "Simplify navigation, use large touch targets, test thumb zones, and ensure fast load times. Keep it minimal and intuitive.",
+    "how to design an accessible form": "Use labels for inputs, high contrast, focus indicators, and ARIA roles where necessary. Avoid placeholder-only instructions.",
+    "what is neumorphism": "Neumorphism is a soft UI style using subtle shadows and highlights to create a pseudo-3D look. Best used sparingly for usability.",
+    "how to structure a landing page": "Start with a strong hero section, followed by benefits, social proof, product features, and a clear call-to-action. Use visual hierarchy.",
+    "what is a design system": "A design system is a set of reusable components, styles, and guidelines for creating consistent user interfaces across products.",
+    "what font is best for readability": "Sans-serif fonts like Roboto, Open Sans, or Inter are great for screen readability. Use 16px+ for body text.",
+    "difference between ui and ux": "UI is how things look — buttons, layouts, typography. UX is how things feel — user flow, task success, and satisfaction.",
+    "how to improve page load speed": "Optimize images, use lazy loading, compress CSS/JS, avoid large font files, and consider CDNs."
+  };
+
+  document.getElementById('uiux-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const input = document.getElementById('uiux-input');
+    const message = input.value.trim();
+    if (!message) return;
+
+    const log = document.getElementById('uiux-log');
+
+    const userMsg = document.createElement('div');
+    userMsg.className = 'uiux-msg uiux-user';
+    userMsg.textContent = message;
+    log.appendChild(userMsg);
+
+    const prompt = message.toLowerCase();
+    const match = Object.keys(uiuxResponses).find(key => prompt.includes(key));
+    const response = match ? uiuxResponses[match] : "Try asking about design tools, color theory, mobile UX, accessibility, or layout patterns.";
+
+    const botMsg = document.createElement('div');
+    botMsg.className = 'uiux-msg uiux-bot';
+    botMsg.textContent = response;
+    log.appendChild(botMsg);
+
+    log.scrollTop = log.scrollHeight;
+    input.value = '';
+  });
+</script>
+
+
+// what is a good color scheme for dark mode
+// difference between figma and sketch
+// how to improve mobile ux
+// how to design an accessible form
+// what is neumorphism
+// how to structure a landing page
+// what is a design system
+// what font is best for readability
+// difference between ui and ux
+// how to improve page load speed
 
 
 <!DOCTYPE html>
