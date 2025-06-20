@@ -710,7 +710,144 @@
 // difference between load bearing and frame structure
 // what are common construction safety standards
    
+<section id="stockbot">
+  <h2>📈 Stock Market Prediction Assistant Bot</h2>
+  <p>Ask about technical indicators, chart patterns, risk management, and general predictive strategies used by traders and analysts.</p>
 
+  <div id="stock-chatbox">
+    <div id="stock-log"></div>
+    <form id="stock-form">
+      <input type="text" id="stock-input" placeholder="Ask about RSI, support/resistance, candlestick patterns..." required />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</section>
+
+<style>
+  #stockbot {
+    background: #f8f9fa;
+    border-top: 2px solid #ccc;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  #stock-chatbox {
+    max-width: 650px;
+    margin: auto;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  #stock-log {
+    height: 320px;
+    overflow-y: auto;
+    background: #f1f8e9;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #c5e1a5;
+  }
+
+  .stock-msg {
+    margin: 8px 0;
+    padding: 10px 14px;
+    border-radius: 10px;
+    max-width: 80%;
+  }
+
+  .stock-user {
+    background-color: #e0f2f1;
+    float: right;
+    text-align: right;
+    clear: both;
+  }
+
+  .stock-bot {
+    background-color: #fff3e0;
+    float: left;
+    text-align: left;
+    clear: both;
+  }
+
+  #stock-input {
+    width: 78%;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+  }
+
+  #stock-form button {
+    padding: 10px 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  #stock-form button:hover {
+    background-color: #388e3c;
+  }
+</style>
+
+<script>
+  const stockResponses = {
+    "what is rsi": "RSI (Relative Strength Index) is a momentum oscillator that measures the speed and change of price movements. Values above 70 suggest overbought; below 30 suggest oversold.",
+    "what is macd": "MACD (Moving Average Convergence Divergence) is a trend-following indicator showing the relationship between two EMAs. The signal line helps spot buy/sell opportunities.",
+    "how to predict market trends": "Use a combination of trend lines, moving averages, volume analysis, and macroeconomic data. Machine learning models can also forecast based on historical data.",
+    "what is support and resistance": "Support is a price level where demand prevents further fall. Resistance is where selling pressure prevents further rise. These help determine entry/exit points.",
+    "what are candlestick patterns": "Patterns like Doji, Hammer, Shooting Star, and Engulfing help predict price reversals. Combine with volume and context for accuracy.",
+    "how to manage trading risk": "Use stop-loss orders, diversify your portfolio, never invest more than 1–2% of capital per trade, and avoid emotional trading.",
+    "what is bollinger bands": "Bollinger Bands use a moving average and 2 standard deviations to visualize volatility. Price touching bands may signal overbought/oversold conditions.",
+    "what is pe ratio": "P/E (Price-to-Earnings) ratio compares a company’s share price to its per-share earnings. A high P/E could mean overvaluation or growth potential.",
+    "what is swing trading": "Swing trading involves holding positions for a few days to weeks. It relies on technical analysis and aims to capture short- to medium-term price moves.",
+    "difference between technical and fundamental analysis": "Technical analysis focuses on charts, indicators, and price action. Fundamental analysis evaluates financial statements, earnings, and company health."
+  };
+
+  document.getElementById('stock-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const input = document.getElementById('stock-input');
+    const message = input.value.trim();
+    if (!message) return;
+
+    const log = document.getElementById('stock-log');
+
+    const userMsg = document.createElement('div');
+    userMsg.className = 'stock-msg stock-user';
+    userMsg.textContent = message;
+    log.appendChild(userMsg);
+
+    const prompt = message.toLowerCase();
+    const match = Object.keys(stockResponses).find(key => prompt.includes(key));
+    const response = match ? stockResponses[match] : "Try asking about RSI, MACD, support/resistance, candlestick patterns, or trading strategies.";
+
+    const botMsg = document.createElement('div');
+    botMsg.className = 'stock-msg stock-bot';
+    botMsg.textContent = response;
+    log.appendChild(botMsg);
+
+    log.scrollTop = log.scrollHeight;
+    input.value = '';
+  });
+</script>
+
+// what is rsi
+// what is macd
+// how to predict market trends
+// what is support and resistance
+// what are candlestick patterns
+// how to manage trading risk
+// what is bollinger bands
+// what is pe ratio
+// what is swing trading
+// difference between technical and fundamental analysis
+
+
+
+
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
