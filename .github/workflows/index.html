@@ -306,6 +306,143 @@
 // difference between ui and ux
 // how to improve page load speed
 
+<section id="space-mission-chatbot">
+  <h2>🚀 Space Mission Design Assistant Bot</h2>
+  <p>Use this assistant for mission planning, satellite design, propulsion selection, and other real-world space engineering decisions.</p>
+
+  <div id="mission-chatbox">
+    <div id="mission-log"></div>
+    <form id="mission-form">
+      <input type="text" id="mission-input" placeholder="Ask about propulsion, orbit types, launch windows..." required />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</section>
+
+<style>
+  #space-mission-chatbot {
+    background: #f9fbff;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    border-top: 2px solid #cce;
+  }
+
+  #mission-chatbox {
+    max-width: 650px;
+    margin: auto;
+    background: #ffffff;
+    border: 1px solid #ccd;
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  #mission-log {
+    height: 320px;
+    overflow-y: auto;
+    background: #f3faff;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccd;
+  }
+
+  .mission-msg {
+    margin: 8px 0;
+    padding: 10px 14px;
+    border-radius: 10px;
+    max-width: 80%;
+  }
+
+  .mission-user {
+    background-color: #e0f7fa;
+    float: right;
+    text-align: right;
+    clear: both;
+  }
+
+  .mission-bot {
+    background-color: #e8f5e9;
+    float: left;
+    text-align: left;
+    clear: both;
+  }
+
+  #mission-input {
+    width: 78%;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+  }
+
+  #mission-form button {
+    padding: 10px 16px;
+    background-color: #0a6bce;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  #mission-form button:hover {
+    background-color: #094a91;
+  }
+</style>
+
+<script>
+  const missionResponses = {
+    "which orbit is best for earth observation": "Low Earth Orbit (LEO), typically 500–1000 km altitude, offers high-resolution Earth observation with minimal latency.",
+    "suggest a propulsion system for mars transfer": "For interplanetary missions like Mars transfer, consider a bipropellant chemical propulsion system for departure, and ion propulsion for cruise phase to optimize fuel efficiency.",
+    "how to protect spacecraft from radiation": "Use aluminum or polyethylene shielding, deploy electronics inside central modules, and consider passive or active radiation mitigation techniques like water jackets or superconducting magnets.",
+    "how to calculate launch window for mars": "Use Hohmann transfer calculations. Launch every ~26 months when Earth and Mars are properly aligned, minimizing delta-v.",
+    "what power system for lunar rover": "RTGs (Radioisotope Thermoelectric Generators) are preferred for longevity in shadowed or dark periods. Solar panels with battery backup work for short-term missions.",
+    "how to communicate with deep space probe": "Use high-gain antennas operating in X-band or Ka-band. Ensure line-of-sight with Deep Space Network (DSN) and include error-correcting encoding like Reed-Solomon.",
+    "how to design a cubesat": "Start with a 1U, 3U, or 6U form factor. Include EPS (Electrical Power System), onboard computer, communication module, ADCS (Attitude Determination and Control System), and payload.",
+    "what is the delta v for moon landing": "Roughly 6.0–6.2 km/s total from LEO to surface and back. Includes TLI (~3.2 km/s), lunar orbit insertion, descent, and return burns.",
+    "recommend launch vehicles for 500kg satellite": "For 500kg payloads to LEO: consider Falcon 1 (retired), Vega (ESA), Electron (Rocket Lab), or small payload rideshare on Falcon 9 or PSLV.",
+    "how to ensure reentry thermal protection": "Use ablative heat shields (e.g., PICA or AVCOAT), aerodynamic deceleration profiles, and ensure correct reentry angle to avoid skipping or burning up."
+  };
+
+  document.getElementById('mission-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const input = document.getElementById('mission-input');
+    const message = input.value.trim();
+    if (!message) return;
+
+    const log = document.getElementById('mission-log');
+
+    const userMsg = document.createElement('div');
+    userMsg.className = 'mission-msg mission-user';
+    userMsg.textContent = message;
+    log.appendChild(userMsg);
+
+    const prompt = message.toLowerCase();
+    const match = Object.keys(missionResponses).find(key => prompt.includes(key));
+    const response = match ? missionResponses[match] : "Try asking about propulsion systems, orbits, launch vehicles, shielding, or mission planning.";
+
+    const botMsg = document.createElement('div');
+    botMsg.className = 'mission-msg mission-bot';
+    botMsg.textContent = response;
+    log.appendChild(botMsg);
+
+    log.scrollTop = log.scrollHeight;
+    input.value = '';
+  });
+</script>
+
+
+// which orbit is best for earth observation
+// suggest a propulsion system for mars transfer
+// how to protect spacecraft from radiation
+// how to calculate launch window for mars
+// what power system for lunar rover
+// how to communicate with deep space probe
+// how to design a cubesat
+// what is the delta v for moon landing
+// recommend launch vehicles for 500kg satellite
+// how to ensure reentry thermal protection
+
+
+    
 
 <!DOCTYPE html>
 <html lang="en">
