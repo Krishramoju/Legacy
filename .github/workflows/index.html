@@ -27,6 +27,182 @@
 
 <div id ="full-content" style = "display:none;"> 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Multi-Mode AI Chatbot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f0f5;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+    }
+    select, input, button {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      font-size: 1rem;
+    }
+    #chatbox {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      height: 300px;
+      overflow-y: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .user {
+      color: #007bff;
+      font-weight: bold;
+    }
+    .bot {
+      color: #28a745;
+      font-weight: bold;
+    }
+    .message {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Multi-Mode AI Chatbot</h1>
+    <select id="mode">
+      <option value="cybersecurity">Cybersecurity</option>
+      <option value="construction">Construction</option>
+      <option value="deepsea">Deep Sea Exploration</option>
+      <option value="space">Space Exploration</option>
+      <option value="uiux">UI/UX Design</option>
+      <option value="news">Business News Generator</option>
+      <option value="stock">Stock Market Prediction</option>
+    </select>
+    <input type="text" id="prompt" placeholder="Type your message..." />
+    <button onclick="respond()">Send</button>
+    <div id="chatbox"></div>
+  </div>
+
+  <script>
+    const responses = {
+      cybersecurity: {
+        prompts: [
+          "What is phishing?",
+          "Explain zero-day vulnerability.",
+          "How do firewalls work?"
+        ],
+        answers: [
+          "Phishing is a social engineering attack to steal sensitive info by pretending to be a trusted source.",
+          "A zero-day vulnerability is a security flaw not yet known to the vendor and has no patch.",
+          "Firewalls monitor and control incoming/outgoing network traffic based on security rules."
+        ]
+      },
+      construction: {
+        prompts: [
+          "What is BIM?",
+          "Latest trends in smart construction?",
+          "How are drones used in construction?"
+        ],
+        answers: [
+          "BIM (Building Information Modeling) is a 3D model-based process for architecture and engineering.",
+          "Trends include AI-driven site analytics, 3D printing, and green construction.",
+          "Drones are used for site surveys, safety inspection, and progress tracking."
+        ]
+      },
+      deepsea: {
+        prompts: [
+          "What is the Mariana Trench?",
+          "What are ROVs?",
+          "What threats are faced underwater?"
+        ],
+        answers: [
+          "The Mariana Trench is the deepest part of the world's oceans, reaching over 36,000 feet.",
+          "ROVs (Remotely Operated Vehicles) explore deep oceans where humans can't go.",
+          "Threats include pressure, darkness, cold, and communication delays."
+        ]
+      },
+      space: {
+        prompts: [
+          "What is the James Webb Telescope?",
+          "How does AI help in space missions?",
+          "What are space debris?"
+        ],
+        answers: [
+          "The James Webb Telescope is NASA's most advanced telescope for infrared astronomy.",
+          "AI helps analyze satellite data, plan missions, and manage spacecraft systems.",
+          "Space debris includes defunct satellites, spent rocket stages, and fragments in orbit."
+        ]
+      },
+      uiux: {
+        prompts: [
+          "What makes a good UI?",
+          "Explain UX research.",
+          "Latest tools in UI design?"
+        ],
+        answers: [
+          "A good UI is clean, consistent, intuitive, and responsive to user needs.",
+          "UX research involves user interviews, usability testing, and personas.",
+          "Latest tools include Figma, Adobe XD, and Framer."
+        ]
+      },
+      news: {
+        prompts: [
+          "Generate today’s business headline.",
+          "Latest tech business news?",
+          "Top merger news?"
+        ],
+        answers: [
+          "Headline: 'AI Startups Attract $5 Billion in Funding This Quarter'.",
+          "Tech Biz: 'Tesla announces new battery tech to increase range by 25%'.",
+          "Merger News: 'Amazon completes acquisition of logistics firm ZepGo'."
+        ]
+      },
+      stock: {
+        prompts: [
+          "Predict Apple stock tomorrow.",
+          "Is it a good time to invest in Tesla?",
+          "Latest trends in stock market?"
+        ],
+        answers: [
+          "Apple stock is likely to stay stable with slight growth based on current market trends.",
+          "Tesla is volatile; consider long-term growth prospects vs short-term risk.",
+          "Trend: Tech stocks remain strong, energy sector sees a downturn."
+        ]
+      }
+    };
+
+    function respond() {
+      const mode = document.getElementById("mode").value;
+      const userPrompt = document.getElementById("prompt").value;
+      const chatbox = document.getElementById("chatbox");
+
+      const data = responses[mode];
+      let reply = "Sorry, I don't understand that prompt.";
+
+      for (let i = 0; i < data.prompts.length; i++) {
+        if (userPrompt.toLowerCase().includes(data.prompts[i].toLowerCase())) {
+          reply = data.answers[i];
+          break;
+        }
+      }
+
+      chatbox.innerHTML += `<div class="message"><span class="user">You:</span> ${userPrompt}</div>`;
+      chatbox.innerHTML += `<div class="message"><span class="bot">Bot:</span> ${reply}</div>`;
+      document.getElementById("prompt").value = "";
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+  </script>
+</body>
+</html>
 
 <section id="chatbot">
   <h2>Try the Cybersecurity Assistant Bot</h2>
