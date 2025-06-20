@@ -1616,12 +1616,14 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Tools Marketplace Feedback (View Only)</title>
+  <title>AI Tools Marketplace Feedback</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -1629,7 +1631,7 @@
       padding: 30px;
       color: #333;
     }
-    h1 {
+    h1, h2 {
       text-align: center;
       color: #2c3e50;
     }
@@ -1640,10 +1642,6 @@
       max-width: 800px;
       margin: auto;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #2980b9;
-      margin-top: 30px;
     }
     label {
       display: block;
@@ -1675,69 +1673,80 @@
     }
     button {
       margin-top: 30px;
-      background: #aaa;
+      background: #2980b9;
       color: white;
       padding: 12px 25px;
       border: none;
       border-radius: 6px;
       font-size: 1em;
-      cursor: not-allowed;
+      cursor: pointer;
     }
-    .note {
-      font-size: 0.9em;
-      color: #999;
-      text-align: center;
-      margin-top: 15px;
+    table {
+      width: 90%;
+      margin: 40px auto;
+      border-collapse: collapse;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background: #2980b9;
+      color: white;
     }
   </style>
 </head>
 <body>
 
-  <h1>AI Tools Marketplace – Feedback Form (View Only)</h1>
+  <h1>AI Tools Marketplace – Feedback Form</h1>
 
-  <form>
-    <!-- Section: General Info -->
+  <form id="feedbackForm">
+    <!-- General Info -->
     <label for="name">Your Name</label>
-    <input type="text" id="name" placeholder="Name" readonly>
+    <input type="text" id="name" placeholder="Name" required>
 
     <label for="email">Email</label>
-    <input type="email" id="email" placeholder="Email" readonly>
+    <input type="email" id="email" placeholder="Email" required>
 
-    <!-- Section: Computer Science Tools -->
+    <!-- Computer Science Tools -->
     <h2>Computer Science AI Tools</h2>
 
     <label>How would you rate the technical accuracy?</label>
     <div class="rating">
-      <label><input type="radio" name="cs_accuracy" disabled> 1</label>
-      <label><input type="radio" name="cs_accuracy" disabled> 2</label>
-      <label><input type="radio" name="cs_accuracy" disabled> 3</label>
-      <label><input type="radio" name="cs_accuracy" disabled> 4</label>
-      <label><input type="radio" name="cs_accuracy" disabled> 5</label>
+      <label><input type="radio" name="cs_accuracy" value="1" required> 1</label>
+      <label><input type="radio" name="cs_accuracy" value="2"> 2</label>
+      <label><input type="radio" name="cs_accuracy" value="3"> 3</label>
+      <label><input type="radio" name="cs_accuracy" value="4"> 4</label>
+      <label><input type="radio" name="cs_accuracy" value="5"> 5</label>
     </div>
 
     <label>Suggestions to improve CS tools:</label>
-    <textarea readonly placeholder="Enter your suggestions..."></textarea>
+    <textarea id="cs_suggestion" placeholder="Enter your suggestions..."></textarea>
 
-    <!-- Section: Economics Tools -->
+    <!-- Economics Tools -->
     <h2>Economics AI Tools</h2>
 
     <label>How would you rate the relevance of economic models used?</label>
     <div class="rating">
-      <label><input type="radio" name="econ_relevance" disabled> 1</label>
-      <label><input type="radio" name="econ_relevance" disabled> 2</label>
-      <label><input type="radio" name="econ_relevance" disabled> 3</label>
-      <label><input type="radio" name="econ_relevance" disabled> 4</label>
-      <label><input type="radio" name="econ_relevance" disabled> 5</label>
+      <label><input type="radio" name="econ_relevance" value="1" required> 1</label>
+      <label><input type="radio" name="econ_relevance" value="2"> 2</label>
+      <label><input type="radio" name="econ_relevance" value="3"> 3</label>
+      <label><input type="radio" name="econ_relevance" value="4"> 4</label>
+      <label><input type="radio" name="econ_relevance" value="5"> 5</label>
     </div>
 
     <label>Suggestions to improve Economic tools:</label>
-    <textarea readonly placeholder="Enter your suggestions..."></textarea>
+    <textarea id="econ_suggestion" placeholder="Enter your suggestions..."></textarea>
 
-    <!-- Section: Overall Experience -->
+    <!-- Overall Experience -->
     <h2>Overall Experience</h2>
 
     <label>How satisfied are you with the marketplace platform?</label>
-    <select disabled>
+    <select id="satisfaction" required>
+      <option value="">Select...</option>
       <option>Very Satisfied</option>
       <option>Satisfied</option>
       <option>Neutral</option>
@@ -1746,15 +1755,66 @@
     </select>
 
     <label>Any additional feedback?</label>
-    <textarea readonly placeholder="Share any other thoughts..."></textarea>
+    <textarea id="other_feedback" placeholder="Share any other thoughts..."></textarea>
 
-    <!-- Disabled Submit Button -->
-    <button type="submit" disabled>Submit Feedback</button>
-    <div class="note">(Form is view-only. Submission is disabled.)</div>
+    <!-- Submit Button -->
+    <button type="submit">Submit Feedback</button>
   </form>
+
+  <!-- Feedback Display Section -->
+  <h2>Submitted Feedback Entries</h2>
+  <table id="feedbackTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>CS Rating</th>
+        <th>CS Suggestion</th>
+        <th>Econ Rating</th>
+        <th>Econ Suggestion</th>
+        <th>Satisfaction</th>
+        <th>Other Feedback</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const form = document.getElementById('feedbackForm');
+    const tableBody = document.querySelector('#feedbackTable tbody');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Extract values
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const csRating = document.querySelector('input[name="cs_accuracy"]:checked')?.value || '';
+      const csSuggestion = document.getElementById('cs_suggestion').value;
+      const econRating = document.querySelector('input[name="econ_relevance"]:checked')?.value || '';
+      const econSuggestion = document.getElementById('econ_suggestion').value;
+      const satisfaction = document.getElementById('satisfaction').value;
+      const otherFeedback = document.getElementById('other_feedback').value;
+
+      // Create table row
+      const row = document.createElement('tr');
+      [name, email, csRating, csSuggestion, econRating, econSuggestion, satisfaction, otherFeedback].forEach(value => {
+        const cell = document.createElement('td');
+        cell.textContent = value;
+        row.appendChild(cell);
+      });
+
+      // Append to table
+      tableBody.appendChild(row);
+
+      // Clear form
+      form.reset();
+    });
+  </script>
 
 </body>
 </html>
+
 
 
 <!DOCTYPE html>
