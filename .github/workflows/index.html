@@ -27,6 +27,16 @@
 
 <div id ="full-content" style = "display:none;"> 
 
+
+    
+      
+
+      
+        
+    
+      
+
+      
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,9 +46,9 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f0f0f5;
       margin: 0;
       padding: 0;
+      transition: background-color 0.4s ease;
     }
     .container {
       max-width: 800px;
@@ -53,6 +63,11 @@
       margin: 10px 0;
       width: 100%;
       font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      cursor: pointer;
     }
     #chatbox {
       background-color: #fff;
@@ -61,13 +76,12 @@
       height: 300px;
       overflow-y: auto;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transition: background-color 0.4s ease;
     }
     .user {
-      color: #007bff;
       font-weight: bold;
     }
     .bot {
-      color: #28a745;
       font-weight: bold;
     }
     .message {
@@ -77,8 +91,8 @@
 </head>
 <body>
   <div class="container">
-    <h1>Multi-Mode AI Chatbot</h1>
-    <select id="mode">
+    <h1 id="title">Multi-Mode AI Chatbot</h1>
+    <select id="mode" onchange="applyTheme()">
       <option value="cybersecurity">Cybersecurity</option>
       <option value="construction">Construction</option>
       <option value="deepsea">Deep Sea Exploration</option>
@@ -88,7 +102,7 @@
       <option value="stock">Stock Market Prediction</option>
     </select>
     <input type="text" id="prompt" placeholder="Type your message..." />
-    <button onclick="respond()">Send</button>
+    <button id="sendBtn" onclick="respond()">Send</button>
     <div id="chatbox"></div>
   </div>
 
@@ -180,9 +194,40 @@
       }
     };
 
+    const themes = {
+      cybersecurity: { bg: "#1e1e2f", chatBg: "#29293d", user: "#00d4ff", bot: "#4aff9a", btn: "#00d4ff" },
+      construction:  { bg: "#fff3e0", chatBg: "#ffe0b2", user: "#e65100", bot: "#2e7d32", btn: "#fb8c00" },
+      deepsea:       { bg: "#e0f7fa", chatBg: "#b2ebf2", user: "#00796b", bot: "#004d40", btn: "#00bcd4" },
+      space:         { bg: "#0b0c2a", chatBg: "#1a1a40", user: "#5edfff", bot: "#f0f8ff", btn: "#3949ab" },
+      uiux:          { bg: "#f9fbe7", chatBg: "#e6ee9c", user: "#4e342e", bot: "#33691e", btn: "#cddc39" },
+      news:          { bg: "#fce4ec", chatBg: "#f8bbd0", user: "#880e4f", bot: "#4a148c", btn: "#f06292" },
+      stock:         { bg: "#e8f5e9", chatBg: "#c8e6c9", user: "#1b5e20", bot: "#004d40", btn: "#81c784" }
+    };
+
+    function applyTheme() {
+      const mode = document.getElementById("mode").value;
+      const theme = themes[mode];
+
+      document.body.style.backgroundColor = theme.bg;
+      document.getElementById("chatbox").style.backgroundColor = theme.chatBg;
+      document.getElementById("sendBtn").style.backgroundColor = theme.btn;
+
+      // Update styles for user and bot dynamically via a <style> tag
+      let dynamicStyle = document.getElementById("dynamic-style");
+      if (!dynamicStyle) {
+        dynamicStyle = document.createElement("style");
+        dynamicStyle.id = "dynamic-style";
+        document.head.appendChild(dynamicStyle);
+      }
+      dynamicStyle.innerHTML = `
+        .user { color: ${theme.user}; }
+        .bot { color: ${theme.bot}; }
+      `;
+    }
+
     function respond() {
       const mode = document.getElementById("mode").value;
-      const userPrompt = document.getElementById("prompt").value;
+      const userPrompt = document.getElementById("prompt").value.trim();
       const chatbox = document.getElementById("chatbox");
 
       const data = responses[mode];
@@ -200,9 +245,13 @@
       document.getElementById("prompt").value = "";
       chatbox.scrollTop = chatbox.scrollHeight;
     }
+
+    // Apply initial theme
+    window.onload = applyTheme;
   </script>
 </body>
 </html>
+
 
 
 
