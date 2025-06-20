@@ -92,22 +92,88 @@
 
 <section id="bots">
   <h2>Cybersecurity Bot Marketplace</h2>
-  <p>AI bots tailored for security ops, compliance, and automation with past prompts and responses included.</p>
+  <p>AI bots tailored for security operations, threat detection, compliance, and automation. Each bot includes real-world prompt-response examples for context and transparency.</p>
 
   <div class="card">
     <h3>Bot: SecOps Assistant</h3>
     <p><strong>Prompt:</strong> Summarize this week's firewall breach logs.</p>
-    <p><strong>Response:</strong> Detected 37 intrusion attempts from known blacklisted IPs. Top target ports: 443, 3389.</p>
+    <p><strong>Response:</strong> Detected 37 intrusion attempts from blacklisted IPs. Top target ports: 443, 3389.</p>
     <p><strong>Prompt:</strong> Suggest remediation actions.</p>
-    <p><strong>Response:</strong> Update firewall rules, block IPs, and conduct patch audit on exposed servers.</p>
+    <p><strong>Response:</strong> Block offending IPs, update firewall rules, and audit recent patch history.</p>
   </div>
 
   <div class="card">
     <h3>Bot: ComplianceBot</h3>
     <p><strong>Prompt:</strong> Are we GDPR compliant with our current user logging?</p>
-    <p><strong>Response:</strong> No. User consent is not recorded before tracking. Recommend consent banner integration.</p>
+    <p><strong>Response:</strong> No. Consent is not documented. Recommend implementing a user consent banner with opt-in logging.</p>
   </div>
+
+  <div class="card">
+    <h3>Bot: PhishWatcher</h3>
+    <p><strong>Prompt:</strong> Analyze this suspicious email received by the CEO.</p>
+    <p><strong>Response:</strong> Phishing attempt detected. Spoofed domain, urgent language, and malicious link redirect.</p>
+    <p><strong>Prompt:</strong> Recommend user awareness action.</p>
+    <p><strong>Response:</strong> Alert employees via Slack. Conduct training on identifying spear phishing tactics.</p>
+  </div>
+
+  <div class="card">
+    <h3>Bot: VulnScanner AI</h3>
+    <p><strong>Prompt:</strong> Scan internal servers for CVE-2024-1357.</p>
+    <p><strong>Response:</strong> Found 3 affected Ubuntu 22.04 hosts missing patch. Critical RCE vulnerability confirmed.</p>
+    <p><strong>Prompt:</strong> Suggest remediation timeline.</p>
+    <p><strong>Response:</strong> Patch within 24 hours. Risk score: 9.1/10. Exploited in wild.</p>
+  </div>
+
+  <div class="card">
+    <h3>Bot: SOC Automation Bot</h3>
+    <p><strong>Prompt:</strong> Automate incident triage for EDR alerts.</p>
+    <p><strong>Response:</strong> Created SOAR workflow: collect alert → enrich with threat intel → auto-quarantine endpoint if IOC is confirmed.</p>
+    <p><strong>Prompt:</strong> Which playbooks are triggered for ransomware?</p>
+    <p><strong>Response:</strong> “Ransomware-Containment.v1” and “EDR-Isolation-Protocol.v3”.</p>
+  </div>
+
+  <div class="card">
+    <h3>Bot: PentestPro</h3>
+    <p><strong>Prompt:</strong> Simulate a SQL injection on /login endpoint.</p>
+    <p><strong>Response:</strong> Payload `admin' OR '1'='1` bypassed auth filter. Login vulnerable. Alert issued.</p>
+    <p><strong>Prompt:</strong> Suggest mitigation steps.</p>
+    <p><strong>Response:</strong> Use parameterized queries, input sanitization, and WAF protection.</p>
+  </div>
+
+  <div class="card">
+    <h3>Bot: DNSShield AI</h3>
+    <p><strong>Prompt:</strong> Monitor DNS queries for exfiltration patterns.</p>
+    <p><strong>Response:</strong> Suspicious TXT record activity detected from host 192.168.22.15 using DNS tunneling technique.</p>
+    <p><strong>Prompt:</strong> What action should we take?</p>
+    <p><strong>Response:</strong> Block outbound DNS for the host and notify the SOC team.</p>
+  </div>
+
+  <div class="card">
+    <h3>Bot: ThreatIntel Fetcher</h3>
+    <p><strong>Prompt:</strong> Get latest indicators of compromise (IOCs) for LockBit ransomware.</p>
+    <p><strong>Response:</strong> Retrieved SHA256 hashes, IPs, and filenames. IOC set last updated 3 hours ago via AlienVault OTX + MISP.</p>
+    <p><strong>Prompt:</strong> Can we block these with our EDR?</p>
+    <p><strong>Response:</strong> Yes. Added to Carbon Black policy as block rules.</p>
+  </div>
+
+  <div class="card">
+    <h3>Bot: InsiderRiskBot</h3>
+    <p><strong>Prompt:</strong> Monitor user behavior for insider threats.</p>
+    <p><strong>Response:</strong> User j.doe downloaded 4GB of files at 2 AM. Unusual access to HR folders.</p>
+    <p><strong>Prompt:</strong> Flag for review?</p>
+    <p><strong>Response:</strong> Yes. Alerted HR and logged incident in SIEM as “Medium Risk.”</p>
+  </div>
+
+  <div class="card">
+    <h3>Bot: PatchAdvisor</h3>
+    <p><strong>Prompt:</strong> What critical patches are pending across endpoints?</p>
+    <p><strong>Response:</strong> 19 endpoints missing April 2025 Microsoft KB5028927 security rollup. Priority: Critical.</p>
+    <p><strong>Prompt:</strong> Recommend rollout plan.</p>
+    <p><strong>Response:</strong> Stage patch by device group. Rollout over 72 hours with rollback plan for mission-critical systems.</p>
+  </div>
+
 </section>
+
 
 <section id="community">
   <h2>Cybersecurity Community Forum</h2>
