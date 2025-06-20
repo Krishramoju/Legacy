@@ -846,8 +846,141 @@
 
 
 
+<section id="biznews-chatbot">
+  <h2>📰 Business News Generator Bot</h2>
+  <p>Generate breaking headlines or summaries on companies, markets, startups, mergers, earnings, or industry trends.</p>
 
-    
+  <div id="biznews-chatbox">
+    <div id="biznews-log"></div>
+    <form id="biznews-form">
+      <input type="text" id="biznews-input" placeholder="E.g., Generate news on Tesla earnings or fintech startups..." required />
+      <button type="submit">Generate</button>
+    </form>
+  </div>
+</section>
+
+<style>
+  #biznews-chatbot {
+    background: #fefefe;
+    border-top: 2px solid #444;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  #biznews-chatbox {
+    max-width: 700px;
+    margin: auto;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  #biznews-log {
+    height: 320px;
+    overflow-y: auto;
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+  }
+
+  .biznews-msg {
+    margin: 8px 0;
+    padding: 10px 14px;
+    border-radius: 10px;
+    max-width: 100%;
+  }
+
+  .biznews-user {
+    background-color: #e0f7fa;
+    float: right;
+    text-align: right;
+    clear: both;
+  }
+
+  .biznews-bot {
+    background-color: #fff9c4;
+    float: left;
+    text-align: left;
+    clear: both;
+    font-weight: 500;
+  }
+
+  #biznews-input {
+    width: 78%;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+  }
+
+  #biznews-form button {
+    padding: 10px 16px;
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  #biznews-form button:hover {
+    background-color: #f57c00;
+  }
+</style>
+
+<script>
+  const biznewsResponses = {
+    "tesla earnings": "Tesla posts Q2 earnings beat: $2.3B profit, revenue up 14%. Energy division sees 45% YoY growth amid global EV demand surge.",
+    "amazon acquisition": "Amazon acquires health-tech startup MedixAI for $1.8B to expand into AI-powered telemedicine.",
+    "fintech startups": "Fintech startups raise $3.2B globally in May 2025, with top funding rounds in digital lending and cross-border payments.",
+    "interest rate hike": "Fed raises interest rate by 25bps to combat persistent inflation. Markets react with mild volatility across tech and housing sectors.",
+    "ipo news": "AI chipmaker NeuroScale files for $1.2B IPO, signaling renewed investor confidence in semiconductor innovation.",
+    "layoffs": "Meta announces 5,000 job cuts in cost-saving restructure focused on AI and metaverse pivot.",
+    "q2 earnings": "Q2 earnings season kicks off: Microsoft, JPMorgan, and Netflix report strong results. S&P 500 sees upward revision.",
+    "oil prices": "Oil prices climb to $92/barrel amid supply cuts by OPEC+ and rising summer demand.",
+    "tech sector growth": "Global tech sector grows 8.5% in Q2 2025, driven by AI SaaS, cloud security, and chip innovation.",
+    "startup funding": "Startup funding rebounds with $12.4B invested globally in early-stage ventures — highest in 3 quarters."
+  };
+
+  document.getElementById('biznews-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const input = document.getElementById('biznews-input');
+    const message = input.value.trim();
+    if (!message) return;
+
+    const log = document.getElementById('biznews-log');
+
+    const userMsg = document.createElement('div');
+    userMsg.className = 'biznews-msg biznews-user';
+    userMsg.textContent = message;
+    log.appendChild(userMsg);
+
+    const prompt = message.toLowerCase();
+    const match = Object.keys(biznewsResponses).find(key => prompt.includes(key));
+    const response = match ? biznewsResponses[match] : "Try asking for news on earnings, IPOs, layoffs, startup funding, or acquisitions.";
+
+    const botMsg = document.createElement('div');
+    botMsg.className = 'biznews-msg biznews-bot';
+    botMsg.textContent = response;
+    log.appendChild(botMsg);
+
+    log.scrollTop = log.scrollHeight;
+    input.value = '';
+  });
+</script>
+
+// tesla earnings
+// amazon acquisition
+// fintech startups
+// interest rate hike
+// ipo news
+// layoffs
+// q2 earnings
+// oil prices
+// tech sector growth
+// startup funding
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
