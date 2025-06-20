@@ -504,49 +504,146 @@ button:hover {
   <title>Multi-Mode AI Chatbot</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Chatbot</title>
+  <style>
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      padding: 0;
-      transition: background-color 0.4s ease;
+      padding: 20px;
+      background-color: #f9f9f9;
     }
     .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 30px;
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     h1 {
       text-align: center;
-    }
-    select, input, button {
-      padding: 10px;
-      margin: 10px 0;
-      width: 100%;
-      font-size: 1rem;
-      border: none;
-      border-radius: 5px;
-    }
-    button {
-      cursor: pointer;
+      color: #333;
+      margin-top: 0;
     }
     #chatbox {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      height: 300px;
+      height: 400px;
       overflow-y: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      transition: background-color 0.4s ease;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      border: 1px solid #ddd;
     }
-    .user {
-      font-weight: bold;
+    .input-area {
+      display: flex;
+      gap: 10px;
     }
-    .bot {
-      font-weight: bold;
+    input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #3367d6;
     }
     .message {
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 80%;
     }
+    .user-message {
+      background-color: #e3f2fd;
+      margin-left: auto;
+    }
+    .bot-message {
+      background-color: #f1f1f1;
+      margin-right: auto;
+    }
+    .sender {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Simple Chatbot</h1>
+    <div id="chatbox"></div>
+    <div class="input-area">
+      <input type="text" id="userInput" placeholder="Type your message...">
+      <button id="sendButton">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatbox = document.getElementById('chatbox');
+    const userInput = document.getElementById('userInput');
+    const sendButton = document.getElementById('sendButton');
+
+    function addMessage(sender, text) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', `${sender}-message`);
+      
+      const senderDiv = document.createElement('div');
+      senderDiv.classList.add('sender');
+      senderDiv.textContent = sender === 'user' ? 'You' : 'Bot';
+      
+      const textDiv = document.createElement('div');
+      textDiv.textContent = text;
+      
+      messageDiv.appendChild(senderDiv);
+      messageDiv.appendChild(textDiv);
+      chatbox.appendChild(messageDiv);
+      
+      // Auto-scroll to bottom
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    function handleSend() {
+      const message = userInput.value.trim();
+      if (message) {
+        addMessage('user', message);
+        userInput.value = '';
+        
+        // Simulate bot response
+        setTimeout(() => {
+          const responses = [
+            "I received your message: " + message,
+            "Thanks for your message!",
+            "I'm a simple bot. You said: " + message,
+            "Can you explain that differently?",
+            "Interesting point about " + message
+          ];
+          const response = responses[Math.floor(Math.random() * responses.length)];
+          addMessage('bot', response);
+        }, 800);
+      }
+    }
+
+    sendButton.addEventListener('click', handleSend);
+    userInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') handleSend();
+    });
+  </script>
+</body>
+</html>
   </style>
 </head>
 <body>
