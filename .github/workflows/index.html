@@ -179,6 +179,8 @@ Would you like me to:
 
 Let me know what’s next!
  */
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -4058,6 +4060,253 @@ Let me know if you want 10+ prompts per mode — I can expand it accordingly.
       { keyword: "sustainability", response: "Tips: Use LED bulbs, reduce meat consumption, and install solar panels if possible." }
     ];
     document.getElementById("green-response").innerText = matchPrompt(input, patterns);
+  }
+</script>
+
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulation AI Scenario Bot</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0; padding: 0;
+      background: #eef2f5;
+    }
+    h1 {
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .bot-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 1rem;
+    }
+    textarea {
+      width: 100%;
+      height: 60px;
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+    }
+    button {
+      margin-top: 0.5rem;
+      background: #2980b9;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .response {
+      margin-top: 0.5rem;
+      background: #f4f6f8;
+      padding: 0.5rem;
+      border-radius: 5px;
+      min-height: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Interactive AI Simulation Bots</h1>
+<div class="container">
+
+  <!-- 🎓 Education Crisis -->
+  <div class="bot-card">
+    <h2>🎓 Education Tutor</h2>
+    <!-- Scenario: A student is failing math and chemistry right before finals -->
+    <!-- Prompts:
+         "Explain mole concept"
+         "Simplify quadratic equation"
+         "Help with calculus"
+    -->
+    <textarea id="edu-input" placeholder="Ask your academic question..."></textarea>
+    <button onclick="eduRespond()">Ask</button>
+    <div class="response" id="edu-response"></div>
+  </div>
+
+  <!-- ⚕️ Healthcare Diagnosis -->
+  <div class="bot-card">
+    <h2>⚕️ Healthcare Bot</h2>
+    <!-- Scenario: Patient presents with overlapping symptoms: fever, chest pain, and fatigue -->
+    <!-- Prompts:
+         "I have chest pain and fatigue"
+         "Should I see a doctor for this?"
+         "Are these COVID symptoms?"
+    -->
+    <textarea id="health-input" placeholder="Describe your symptoms..."></textarea>
+    <button onclick="healthRespond()">Ask</button>
+    <div class="response" id="health-response"></div>
+  </div>
+
+  <!-- ⚖️ Legal Dispute -->
+  <div class="bot-card">
+    <h2>⚖️ Legal Bot</h2>
+    <!-- Scenario: AI wrote a contract, now there's a dispute between two companies -->
+    <!-- Prompts:
+         "Is AI-generated contract legally binding?"
+         "Can I sue over this clause?"
+         "Who is liable if AI wrote it?"
+    -->
+    <textarea id="legal-input" placeholder="Ask about your legal concern..."></textarea>
+    <button onclick="legalRespond()">Ask</button>
+    <div class="response" id="legal-response"></div>
+  </div>
+
+  <!-- ⚡ Green Tech Crisis -->
+  <div class="bot-card">
+    <h2>⚡ Green Tech Helper</h2>
+    <!-- Scenario: Sudden spike in energy usage in a green-certified building -->
+    <!-- Prompts:
+         "Why is my energy bill high?"
+         "Could insulation failure cause spikes?"
+         "How to monitor real-time usage?"
+    -->
+    <textarea id="green-input" placeholder="Ask about sustainability..."></textarea>
+    <button onclick="greenRespond()">Ask</button>
+    <div class="response" id="green-response"></div>
+  </div>
+
+  <!-- 🏗 Construction Emergency -->
+  <div class="bot-card">
+    <h2>🏗 Construction Site Bot</h2>
+    <!-- Scenario: Crane collapse during unexpected windstorm -->
+    <!-- Prompts:
+         "What safety protocol was violated?"
+         "How to assess worker injuries?"
+         "How to report to site manager?"
+    -->
+    <textarea id="construct-input" placeholder="Enter construction query..."></textarea>
+    <button onclick="constructRespond()">Ask</button>
+    <div class="response" id="construct-response"></div>
+  </div>
+
+  <!-- 🌊 Deep Sea Exploration -->
+  <div class="bot-card">
+    <h2>🌊 Deep Sea Mission Bot</h2>
+    <!-- Scenario: ROV is trapped in a narrow trench segment -->
+    <!-- Prompts:
+         "ROV not responding to signal"
+         "How to retrieve stuck ROV?"
+         "Check depth pressure sensors"
+    -->
+    <textarea id="deepsea-input" placeholder="Control your ROV mission..."></textarea>
+    <button onclick="deepseaRespond()">Ask</button>
+    <div class="response" id="deepsea-response"></div>
+  </div>
+
+  <!-- 🔐 Cybersecurity Incident -->
+  <div class="bot-card">
+    <h2>🔐 Cybersecurity Agent</h2>
+    <!-- Scenario: Internal server hit with ransomware -->
+    <!-- Prompts:
+         "Identify affected systems"
+         "Isolate the infected node"
+         "Check ransomware signature"
+         "Notify security team"
+    -->
+    <textarea id="cyber-input" placeholder="Launch your breach investigation..."></textarea>
+    <button onclick="cyberRespond()">Ask</button>
+    <div class="response" id="cyber-response"></div>
+  </div>
+
+</div>
+
+<script>
+  function matchPrompt(input, patterns) {
+    input = input.toLowerCase();
+    for (let p of patterns) {
+      if (input.includes(p.keyword)) {
+        return p.response;
+      }
+    }
+    return "⚠️ Unrecognized prompt. Try a more specific question related to the scenario.";
+  }
+
+  function eduRespond() {
+    const input = document.getElementById("edu-input").value;
+    const patterns = [
+      { keyword: "mole", response: "The mole concept relates the number of particles to Avogadro’s number. 1 mole = 6.022×10²³ particles." },
+      { keyword: "quadratic", response: "Use the formula: x = [-b ± √(b²-4ac)] / 2a to solve any quadratic equation." },
+      { keyword: "calculus", response: "Start with derivatives: dy/dx of x² is 2x. Apply rules step-by-step." }
+    ];
+    document.getElementById("edu-response").innerText = matchPrompt(input, patterns);
+  }
+
+  function healthRespond() {
+    const input = document.getElementById("health-input").value;
+    const patterns = [
+      { keyword: "chest pain", response: "Chest pain and fatigue may signal a cardiac issue. Seek emergency care immediately." },
+      { keyword: "doctor", response: "Given your symptoms, visiting a healthcare provider is strongly recommended." },
+      { keyword: "covid", response: "Some symptoms match COVID. Take a test and monitor oxygen levels." }
+    ];
+    document.getElementById("health-response").innerText = matchPrompt(input, patterns);
+  }
+
+  function legalRespond() {
+    const input = document.getElementById("legal-input").value;
+    const patterns = [
+      { keyword: "contract", response: "AI-generated contracts can be binding if both parties consented and understood the terms." },
+      { keyword: "clause", response: "A vague or unfair clause can be contested under contract law. Legal counsel is advised." },
+      { keyword: "liable", response: "Liability may fall on the user or publisher of the AI tool depending on jurisdiction." }
+    ];
+    document.getElementById("legal-response").innerText = matchPrompt(input, patterns);
+  }
+
+  function greenRespond() {
+    const input = document.getElementById("green-input").value;
+    const patterns = [
+      { keyword: "energy bill", response: "Check HVAC systems and real-time meter readings. Sudden spikes may indicate leakage or overuse." },
+      { keyword: "insulation", response: "Yes, poor insulation or thermal leaks can drastically affect energy efficiency." },
+      { keyword: "monitor", response: "Install IoT energy monitors like Sense or Nest to track consumption." }
+    ];
+    document.getElementById("green-response").innerText = matchPrompt(input, patterns);
+  }
+
+  function constructRespond() {
+    const input = document.getElementById("construct-input").value;
+    const patterns = [
+      { keyword: "protocol", response: "Crane should not be operated above wind thresholds. Violation may have caused structural stress." },
+      { keyword: "injuries", response: "Immediately assess all workers on site. Prioritize first-aid and call emergency services." },
+      { keyword: "report", response: "Document the event, take photos, and report to site supervisor and safety board within 24 hours." }
+    ];
+    document.getElementById("construct-response").innerText = matchPrompt(input, patterns);
+  }
+
+  function deepseaRespond() {
+    const input = document.getElementById("deepsea-input").value;
+    const patterns = [
+      { keyword: "not responding", response: "Signal loss may be due to pressure. Activate backup communication protocol." },
+      { keyword: "retrieve", response: "Activate the ROV’s emergency ascent tether. If stuck, deploy auxiliary drone." },
+      { keyword: "pressure", response: "Pressure sensors above 1000 atm may jam motors. Retract arms and rise slowly." }
+    ];
+    document.getElementById("deepsea-response").innerText = matchPrompt(input, patterns);
+  }
+
+  function cyberRespond() {
+    const input = document.getElementById("cyber-input").value;
+    const patterns = [
+      { keyword: "affected", response: "Servers: F3, D4 and the shared NAS are affected. Isolate them now." },
+      { keyword: "isolate", response: "Disconnect infected nodes from the network immediately. Disable external connections." },
+      { keyword: "signature", response: "Detected ransomware matches LockBit strain. Use hash DB for confirmation." },
+      { keyword: "notify", response: "Incident reported to SOC team. Begin forensic log capture immediately." }
+    ];
+    document.getElementById("cyber-response").innerText = matchPrompt(input, patterns);
   }
 </script>
 
