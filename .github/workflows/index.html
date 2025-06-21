@@ -1,6 +1,176 @@
 <html>
 
 <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🔬 Prompt Surgery Lab</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      padding: 40px;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .prompt-section {
+      margin: 30px auto;
+      max-width: 900px;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .field {
+      font-weight: bold;
+      color: #2980b9;
+      margin-bottom: 10px;
+    }
+    .bad {
+      background: #ffdddd;
+      padding: 10px;
+      border-left: 5px solid #e74c3c;
+    }
+    .why-bad {
+      font-style: italic;
+      color: #c0392b;
+    }
+    .fixed {
+      background: #ddffdd;
+      padding: 10px;
+      border-left: 5px solid #27ae60;
+      margin-top: 10px;
+    }
+    .response {
+      background: #e8f6ff;
+      padding: 10px;
+      border-left: 5px solid #3498db;
+      margin-top: 10px;
+      color: #2c3e50;
+    }
+    .divider {
+      margin: 30px 0;
+      border-top: 2px dashed #ccc;
+    }
+    .interactive {
+      background: #fff7e6;
+      border-left: 5px solid #f39c12;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    .interactive textarea {
+      width: 100%;
+      height: 80px;
+      margin-bottom: 10px;
+    }
+    .interactive button {
+      padding: 10px 20px;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .interactive-response {
+      margin-top: 20px;
+      padding: 10px;
+      background: #ecf0f1;
+      border-left: 5px solid #7f8c8d;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🔬 Prompt Surgery Lab with Interactive Response</h1>
+<p style="text-align:center; color:#666;">Fix bad prompts, learn from examples, and try your own!</p>
+
+<!-- Prompt Examples -->
+<div id="examplePrompts"></div>
+
+<div class="divider"></div>
+
+<!-- Interactive Prompt Tester -->
+<div class="prompt-section interactive">
+  <h2>🧪 Test Your Own Prompt</h2>
+  <p>Enter a prompt related to cybersecurity, space, sea exploration, stock market, or business news:</p>
+  <textarea id="userPrompt" placeholder="e.g., What is happening in AI?"></textarea><br>
+  <button onclick="suggestFix()">Fix & Respond</button>
+  <div id="userFix" class="interactive-response"></div>
+</div>
+
+<script>
+const prompts = [
+  {
+    field: "Cybersecurity",
+    bad: "Is my computer safe?",
+    why: "Too general, lacks context or technical indicators.",
+    fixed: "Check if the firewall on Windows 10 is blocking outbound traffic for unknown apps and list any open ports.",
+    response: "Open Windows Security → Firewall & Network Protection. Then check 'Allowed Apps' and run 'netstat -an' in CMD to review open ports."
+  },
+  {
+    field: "Space Exploration",
+    bad: "Show me AI in space",
+    why: "Vague, no specific task or project mentioned.",
+    fixed: "Explain how SPHERES uses AI for autonomous docking tests in the ISS.",
+    response: "SPHERES bots use AI algorithms to simulate and test spacecraft formation flying and docking maneuvers inside the ISS with high precision."
+  },
+  {
+    field: "Deep Sea Exploration",
+    bad: "What can robots do underwater?",
+    why: "Too broad, lacks depth and scenario.",
+    fixed: "Describe how AI-enabled ROVs help detect and classify plastic waste on the seafloor.",
+    response: "AI-enabled ROVs use vision models to detect and classify marine debris, allowing autonomous mapping of pollution zones on the seabed."
+  },
+  {
+    field: "Business News Generation",
+    bad: "Summarize the market",
+    why: "No sector, time, or geographic region specified.",
+    fixed: "Summarize today's market performance focusing on major Asian indices and tech stocks.",
+    response: "Asian markets closed mixed today as Japan's Nikkei rose 0.7% while China’s CSI 300 dipped 1.2% amid tech sector volatility."
+  },
+  {
+    field: "Stock Market Prediction",
+    bad: "Will Tesla go up?",
+    why: "Too speculative, lacks timeframe and parameters.",
+    fixed: "Based on earnings history and RSI, what’s Tesla’s short-term trend prediction for next week?",
+    response: "Tesla’s RSI sits near 70, indicating overbought status. Combined with mixed Q2 earnings, AI models suggest a likely correction in the short term."
+  }
+];
+
+function renderExamples() {
+  const container = document.getElementById('examplePrompts');
+  prompts.forEach(p => {
+    container.innerHTML += `
+      <div class="prompt-section">
+        <div class="field">Field: ${p.field}</div>
+        <div class="bad">Prompt: "${p.bad}"<div class="why-bad">${p.why}</div></div>
+        <div class="fixed">Fixed Prompt: "${p.fixed}"</div>
+        <div class="response">${p.response}</div>
+      </div>
+      <div class="divider"></div>
+    `;
+  });
+}
+
+function suggestFix() {
+  const input = document.getElementById("userPrompt").value.trim().toLowerCase();
+  const result = prompts.find(p => input.includes(p.field.toLowerCase()) || input.includes(p.bad.toLowerCase().split(" ")[0]));
+  const output = document.getElementById("userFix");
+  if (result) {
+    output.innerHTML = `<strong>Suggested Fix:</strong> ${result.fixed}<br><strong>Sample Response:</strong> ${result.response}`;
+  } else {
+    output.innerHTML = "<em>No match found. Please specify the field and add more context for better suggestions.</em>";
+  }
+}
+
+renderExamples();
+</script>
+
+</body>
+</html>
 
 
 <!DOCTYPE html>
