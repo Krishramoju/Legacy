@@ -4610,4 +4610,171 @@ button:hover {
 </html>
 
 
+<h2> post personalization </h2>
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Smart AI Chatbot with Prompt Answering + Analytics</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #eef2f5;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .chatbox {
+      border: 1px solid #ccc;
+      background: #f9f9f9;
+      padding: 15px;
+      height: 300px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+    }
+    .input-section input, .input-section button {
+      font-size: 1rem;
+      padding: 10px;
+      margin-top: 10px;
+      width: 100%;
+    }
+    .message {
+      margin: 8px 0;
+    }
+    .user { color: #007bff; }
+    .bot { color: #28a745; }
+    .analytics {
+      background: #f1f1f1;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    .analytics ul {
+      list-style: none;
+      padding: 0;
+    }
+    .analytics li {
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Smart AI Chatbot (With Prompt-Based Answers)</h1>
+    <div class="chatbox" id="chatbox"></div>
+    <div class="input-section">
+      <input type="text" id="userInput" placeholder="Example: I'm Raj. How does AI help detect malware in cybersecurity?" />
+      <button onclick="handleMessage()">Send</button>
+    </div>
+
+    <h2>📊 Analytics: Topics & Subtopics</h2>
+    <div class="analytics" id="analytics"></div>
+  </div>
+
+  <script>
+    const queryCount = {};
+
+    function handleMessage() {
+      const input = document.getElementById("userInput").value.trim();
+      if (!input) return;
+
+      appendMessage(`You: ${input}`, 'user');
+
+      const responseObj = generateSmartResponse(input);
+      const key = `${responseObj.industry} → ${responseObj.subtopic}`;
+      queryCount[key] = (queryCount[key] || 0) + 1;
+      updateAnalytics();
+
+      setTimeout(() => {
+        appendMessage(`Bot: ${responseObj.reply}`, 'bot');
+        document.getElementById("userInput").value = "";
+      }, 500);
+    }
+
+    function appendMessage(text, type) {
+      const div = document.createElement("div");
+      div.className = "message " + type;
+      div.textContent = text;
+      document.getElementById("chatbox").appendChild(div);
+      document.getElementById("chatbox").scrollTop = document.getElementById("chatbox").scrollHeight;
+    }
+
+    function updateAnalytics() {
+      const analytics = document.getElementById("analytics");
+      analytics.innerHTML = '<ul>' +
+        Object.entries(queryCount)
+          .map(([key, val]) => `<li><strong>${key}</strong>: ${val} queries</li>`)
+          .join('') +
+        '</ul>';
+    }
+
+    function generateSmartResponse(input) {
+      const nameMatch = input.match(/\b(?:I am|I'm|This is)\s+(\w+)/i);
+      const name = nameMatch ? nameMatch[1] : "User";
+
+      let industry = "General";
+      if (/security|phishing|ransomware|firewall/i.test(input)) industry = "Cybersecurity";
+      else if (/build|construct|site|cement|architecture/i.test(input)) industry = "Construction";
+      else if (/space|nasa|mars|rover|satellite/i.test(input)) industry = "Space Exploration";
+      else if (/ocean|deep|marine|submarine|sonar/i.test(input)) industry = "Deep Sea Exploration";
+      else if (/stock|shares|portfolio|index|trading/i.test(input)) industry = "Stock Market Prediction";
+      else if (/news|headline|press|journalism|report/i.test(input)) industry = "Business News Generation";
+
+      let subtopic = "General Subtopic";
+      if (/malware|threat|detect|intrusion|spyware/i.test(input)) subtopic = "Threat Detection";
+      else if (/BIM|model|blueprint|3D design/i.test(input)) subtopic = "BIM";
+      else if (/eco|green|sustainable/i.test(input)) subtopic = "Green Building";
+      else if (/robot|automation|ai/i.test(input) && industry === "Construction") subtopic = "Construction Robotics";
+      else if (/rover|autonomous|AI rover/i.test(input)) subtopic = "AI Rovers";
+      else if (/telescope|infrared|JWST|James Webb/i.test(input)) subtopic = "Space Telescopes";
+      else if (/marine|biology|ecosystem/i.test(input)) subtopic = "Marine Biology";
+      else if (/seafloor|mapping|scan/i.test(input)) subtopic = "Seafloor Mapping";
+      else if (/ROV|remote vehicle/i.test(input)) subtopic = "ROV Systems";
+      else if (/market report|summary|trend/i.test(input)) subtopic = "Market Reports";
+      else if (/writing|automated|draft/i.test(input)) subtopic = "Automated Writing";
+      else if (/alert|real-time|breaking/i.test(input)) subtopic = "Real-Time Alerts";
+      else if (/portfolio|invest|rebalancing/i.test(input)) subtopic = "Portfolio Optimization";
+      else if (/sentiment|opinion|social media/i.test(input)) subtopic = "Sentiment Analysis";
+      else if (/forecast|prediction|time series/i.test(input)) subtopic = "Time-Series Forecasting";
+
+      const promptAnswers = {
+        "Cybersecurity-Threat Detection": "AI helps detect threats in cybersecurity by continuously monitoring traffic patterns and using machine learning to flag suspicious behavior such as unauthorized access, malware downloads, or phishing attempts.",
+        "Construction-BIM": "AI enhances BIM by automating clash detection, cost forecasting, and resource scheduling, resulting in fewer design errors and better efficiency in construction.",
+        "Construction-Green Building": "AI optimizes green construction by analyzing environmental data, suggesting low-impact materials, and forecasting long-term energy efficiency of buildings.",
+        "Construction-Construction Robotics": "AI powers construction robots that can automate dangerous or repetitive tasks like rebar tying, welding, and masonry, reducing labor strain and boosting safety.",
+        "Space Exploration-AI Rovers": "AI helps rovers autonomously navigate, analyze rock composition, detect hazards, and make decisions when out of communication with Earth.",
+        "Space Exploration-Space Telescopes": "AI in space telescopes filters noisy data, detects anomalies, and classifies cosmic bodies like galaxies, stars, and exoplanets in real-time.",
+        "Deep Sea Exploration-ROV Systems": "AI allows ROVs to detect obstacles, adjust their paths autonomously, and collect high-resolution imaging from dangerous deep-sea environments.",
+        "Deep Sea Exploration-Seafloor Mapping": "AI interprets sonar and visual data to create accurate 3D topography of the seafloor, helping in geology and oceanography.",
+        "Deep Sea Exploration-Marine Biology": "AI identifies marine species, tracks their behavior, and monitors reef health by analyzing underwater footage and environmental sensors.",
+        "Business News Generation-Market Reports": "AI can extract financial data, earnings results, and trends, then generate plain-language reports for easy understanding by investors.",
+        "Business News Generation-Automated Writing": "AI systems convert structured financial or economic data into readable news articles instantly using Natural Language Generation (NLG).",
+        "Business News Generation-Real-Time Alerts": "AI scans market feeds, SEC filings, and global news sources to alert traders or analysts about major real-time changes.",
+        "Stock Market Prediction-Portfolio Optimization": "AI uses algorithms to optimize asset distribution based on your financial goals, risk profile, and market projections.",
+        "Stock Market Prediction-Sentiment Analysis": "AI scans social media and news platforms to gauge public sentiment, helping predict how it might affect stock performance.",
+        "Stock Market Prediction-Time-Series Forecasting": "AI models use past stock data to forecast future trends, incorporating seasonality, volatility, and external factors like inflation."
+      };
+
+      const key = `${industry}-${subtopic}`;
+      const directAnswer = promptAnswers[key] || "That's an interesting topic! AI is making big advances in this area, but I’d need more specifics to give a detailed answer.";
+
+      return {
+        industry,
+        subtopic,
+        reply: `Hey ${name}, you’re asking about ${subtopic} in ${industry}. Here's what I can tell you: ${directAnswer}`
+      };
+    }
+  </script>
+</body>
+</html>
 
