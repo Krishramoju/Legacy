@@ -2,6 +2,280 @@
 
 <body>
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>This Tool Replaced… (Expanded)</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f9;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    .tool-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .tool-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .tool-card:hover {
+      transform: scale(1.03);
+    }
+
+    .tool-card h3 {
+      margin: 0;
+      color: #34495e;
+      font-size: 18px;
+    }
+
+    #popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #popupContent {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    #popupContent h2 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+
+    #popupContent p {
+      color: #555;
+      font-size: 16px;
+    }
+
+    #closePopup {
+      margin-top: 20px;
+      padding: 8px 16px;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🔁 “This Tool Replaced…” Virtual Museum</h1>
+<p style="text-align:center; color:#666;">Explore what traditional methods were replaced by AI tools across industries</p>
+
+<div class="tool-list" id="toolList"></div>
+
+<!-- Popup -->
+<div id="popup">
+  <div id="popupContent">
+    <h2 id="popupTitle"></h2>
+    <p id="popupDesc"></p>
+    <button id="closePopup" onclick="closePopup()">Close</button>
+  </div>
+</div>
+
+<script>
+const tools = [
+  // 🔵 Deep Sea Exploration
+  {
+    name: "ORCA AI",
+    field: "Deep Sea Exploration",
+    replaced: "Human visual watchkeepers and radar-only systems",
+    nowDoes: "AI-based vision and predictive collision avoidance on autonomous ships"
+  },
+  {
+    name: "BlueROV2 + Jetson Nano",
+    field: "Deep Sea Exploration",
+    replaced: "Manual tethered ROVs with no onboard processing",
+    nowDoes: "Onboard object detection, mapping, and autonomous navigation"
+  },
+  {
+    name: "SEAMate AI",
+    field: "Deep Sea Exploration",
+    replaced: "Radio logs, paper weather maps, and manual decision-making",
+    nowDoes: "Voice-assistive planning and smart voyage route forecasting"
+  },
+  {
+    name: "NautilusLive Mapping Bot",
+    field: "Deep Sea Exploration",
+    replaced: "Grid-based seabed mapping by human divers",
+    nowDoes: "AI-prioritized sonar scans and real-time 3D floor reconstruction"
+  },
+
+  // 🛰️ Space Exploration
+  {
+    name: "CIMON",
+    field: "Space Exploration",
+    replaced: "Printed ISS manuals and Earth-grounded expert calls",
+    nowDoes: "Onboard voice assistant that interacts and monitors astronaut behavior"
+  },
+  {
+    name: "COSMIC AI",
+    field: "Space Exploration",
+    replaced: "Balloon-based forecasting and slow satellite analysis",
+    nowDoes: "Real-time climate model updates via GPS radio occultation data"
+  },
+  {
+    name: "SPHERES AI (MIT)",
+    field: "Space Exploration",
+    replaced: "Manual formation flying simulations on Earth",
+    nowDoes: "AI-controlled microbots inside ISS for testing autonomous space swarms"
+  },
+  {
+    name: "AEGIS (Mars Rover)",
+    field: "Space Exploration",
+    replaced: "Earth-controlled rock targeting with 20-min signal lag",
+    nowDoes: "On-the-spot rock detection and analysis by the rover itself"
+  },
+  {
+    name: "LISA Pathfinder AI",
+    field: "Space Exploration",
+    replaced: "Manual tuning of gravitational wave sensors",
+    nowDoes: "AI control of precision thrusters to maintain free-fall instruments"
+  },
+
+  // 🔐 Cybersecurity
+  {
+    name: "Darktrace",
+    field: "Cybersecurity",
+    replaced: "Signature-based antivirus and basic rule firewalls",
+    nowDoes: "AI-powered anomaly detection and autonomous threat response"
+  },
+  {
+    name: "CrowdStrike Falcon",
+    field: "Cybersecurity",
+    replaced: "Legacy endpoint antivirus solutions (e.g. McAfee)",
+    nowDoes: "Cloud-based behavioral threat protection and attack forensics"
+  },
+  {
+    name: "Vectra AI",
+    field: "Cybersecurity",
+    replaced: "Manual traffic log scanning and SIEM rule alerts",
+    nowDoes: "AI identity breach detection and proactive incident triage"
+  },
+  {
+    name: "Microsoft Defender AI",
+    field: "Cybersecurity",
+    replaced: "Manual firewall config and static email filters",
+    nowDoes: "AI adaptive threat blocking in real-time across Microsoft ecosystem"
+  },
+  {
+    name: "Google Chronicle Security AI",
+    field: "Cybersecurity",
+    replaced: "Archived log servers and Splunk-style dashboards",
+    nowDoes: "Petabyte-scale search and instant threat correlation"
+  },
+
+  // 📰 Business News Generation
+  {
+    name: "BloombergGPT",
+    field: "Business News Generation",
+    replaced: "Human financial reporters and data summarizers",
+    nowDoes: "Automated, domain-specific article writing and summarization"
+  },
+  {
+    name: "Primer AI",
+    field: "Business News Generation",
+    replaced: "Government analysts reading daily briefs",
+    nowDoes: "AI-generated short reports from long government docs"
+  },
+  {
+    name: "MarketMuse",
+    field: "Business News Generation",
+    replaced: "SEO consultants and topic planning teams",
+    nowDoes: "AI-based scoring and headline-topic generator for content strategy"
+  },
+  {
+    name: "Copy.ai",
+    field: "Business News Generation",
+    replaced: "Manual PR writing and social post crafting",
+    nowDoes: "Auto-generated marketing content for LinkedIn, newsletters, etc."
+  },
+
+  // 📈 Stock Market Prediction
+  {
+    name: "Kavout K Score",
+    field: "Stock Market Prediction",
+    replaced: "Moving averages, RSI, and MACD used manually",
+    nowDoes: "AI-based scoring system for equities using financial + sentiment data"
+  },
+  {
+    name: "Tradytics",
+    field: "Stock Market Prediction",
+    replaced: "Manual options volume tracking and Twitter sentiment reading",
+    nowDoes: "AI-generated visual trading signals and automated alerts"
+  },
+  {
+    name: "EquBot",
+    field: "Stock Market Prediction",
+    replaced: "Fund managers and Excel portfolio planning",
+    nowDoes: "AI-managed ETFs using NLP to read earnings, filings, and news"
+  },
+  {
+    name: "Alpaca AI API",
+    field: "Stock Market Prediction",
+    replaced: "Human brokers and order placement terminals",
+    nowDoes: "API-based auto trading powered by ML models"
+  }
+];
+
+function showPopup(tool) {
+  document.getElementById('popupTitle').innerText = `${tool.name} (${tool.field})`;
+  document.getElementById('popupDesc').innerHTML = `
+    <strong>Replaced:</strong> ${tool.replaced}<br/><br/>
+    <strong>Now Does:</strong> ${tool.nowDoes}
+  `;
+  document.getElementById('popup').style.display = 'flex';
+}
+
+function closePopup() {
+  document.getElementById('popup').style.display = 'none';
+}
+
+// Render tool cards
+tools.forEach(tool => {
+  const div = document.createElement('div');
+  div.className = 'tool-card';
+  div.innerHTML = `<h3>${tool.name}</h3><small>${tool.field}</small>`;
+  div.onclick = () => showPopup(tool);
+  document.getElementById('toolList').appendChild(div);
+});
+</script>
+
+</body>
+</html>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
