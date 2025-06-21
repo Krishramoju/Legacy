@@ -4612,31 +4612,28 @@ button:hover {
 
 <h2> post personalization </h2>
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Smart AI Chatbot with Prompt Answering + Analytics</title>
+  <title>Truly Smart AI Chatbot (Expanded Prompt Handling)</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #eef2f5;
+      background: #f0f2f5;
       padding: 20px;
     }
     .container {
       max-width: 900px;
       margin: auto;
       background: #fff;
-      border-radius: 10px;
       padding: 20px;
+      border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h1, h2 {
-      text-align: center;
     }
     .chatbox {
       border: 1px solid #ccc;
-      background: #f9f9f9;
+      background: #fafafa;
       padding: 15px;
       height: 300px;
       overflow-y: auto;
@@ -4648,36 +4645,34 @@ button:hover {
       margin-top: 10px;
       width: 100%;
     }
-    .message {
-      margin: 8px 0;
-    }
+    .message { margin: 8px 0; }
     .user { color: #007bff; }
     .bot { color: #28a745; }
     .analytics {
-      background: #f1f1f1;
-      border: 1px solid #ccc;
+      background: #f4f4f4;
       padding: 10px;
       border-radius: 8px;
+      border: 1px solid #ccc;
     }
     .analytics ul {
-      list-style: none;
       padding: 0;
+      list-style: none;
     }
     .analytics li {
-      margin: 4px 0;
+      margin: 5px 0;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Smart AI Chatbot (With Prompt-Based Answers)</h1>
+    <h1>True AI Chatbot: Expanded Prompts + Analytics</h1>
     <div class="chatbox" id="chatbox"></div>
     <div class="input-section">
-      <input type="text" id="userInput" placeholder="Example: I'm Raj. How does AI help detect malware in cybersecurity?" />
+      <input type="text" id="userInput" placeholder="Ask anything like: 'I'm Krish. How does AI help detect phishing?'" />
       <button onclick="handleMessage()">Send</button>
     </div>
 
-    <h2>📊 Analytics: Topics & Subtopics</h2>
+    <h2>📊 Topic Analytics</h2>
     <div class="analytics" id="analytics"></div>
   </div>
 
@@ -4690,20 +4685,20 @@ button:hover {
 
       appendMessage(`You: ${input}`, 'user');
 
-      const responseObj = generateSmartResponse(input);
-      const key = `${responseObj.industry} → ${responseObj.subtopic}`;
+      const response = generateSmartResponse(input);
+      const key = `${response.industry} → ${response.subtopic}`;
       queryCount[key] = (queryCount[key] || 0) + 1;
       updateAnalytics();
 
       setTimeout(() => {
-        appendMessage(`Bot: ${responseObj.reply}`, 'bot');
-        document.getElementById("userInput").value = "";
-      }, 500);
+        appendMessage(`Bot: ${response.reply}`, 'bot');
+        document.getElementById("userInput").value = '';
+      }, 400);
     }
 
     function appendMessage(text, type) {
       const div = document.createElement("div");
-      div.className = "message " + type;
+      div.className = `message ${type}`;
       div.textContent = text;
       document.getElementById("chatbox").appendChild(div);
       document.getElementById("chatbox").scrollTop = document.getElementById("chatbox").scrollHeight;
@@ -4719,62 +4714,68 @@ button:hover {
     }
 
     function generateSmartResponse(input) {
-      const nameMatch = input.match(/\b(?:I am|I'm|This is)\s+(\w+)/i);
+      const nameMatch = input.match(/\b(?:I am|I'm|This is|My name is)\s+(\w+)/i);
       const name = nameMatch ? nameMatch[1] : "User";
 
+      // Detecting industry
       let industry = "General";
-      if (/security|phishing|ransomware|firewall/i.test(input)) industry = "Cybersecurity";
-      else if (/build|construct|site|cement|architecture/i.test(input)) industry = "Construction";
-      else if (/space|nasa|mars|rover|satellite/i.test(input)) industry = "Space Exploration";
-      else if (/ocean|deep|marine|submarine|sonar/i.test(input)) industry = "Deep Sea Exploration";
-      else if (/stock|shares|portfolio|index|trading/i.test(input)) industry = "Stock Market Prediction";
-      else if (/news|headline|press|journalism|report/i.test(input)) industry = "Business News Generation";
+      if (/security|phishing|malware|ransomware/i.test(input)) industry = "Cybersecurity";
+      else if (/build|construct|architecture|cement|robot/i.test(input)) industry = "Construction";
+      else if (/space|nasa|mars|satellite|jwst/i.test(input)) industry = "Space Exploration";
+      else if (/ocean|underwater|marine|deep|sonar/i.test(input)) industry = "Deep Sea Exploration";
+      else if (/stock|shares|portfolio|trading|forecast|sentiment/i.test(input)) industry = "Stock Market Prediction";
+      else if (/news|press|headline|journalism|alert/i.test(input)) industry = "Business News";
 
+      // Detecting subtopic
       let subtopic = "General Subtopic";
-      if (/malware|threat|detect|intrusion|spyware/i.test(input)) subtopic = "Threat Detection";
-      else if (/BIM|model|blueprint|3D design/i.test(input)) subtopic = "BIM";
-      else if (/eco|green|sustainable/i.test(input)) subtopic = "Green Building";
-      else if (/robot|automation|ai/i.test(input) && industry === "Construction") subtopic = "Construction Robotics";
-      else if (/rover|autonomous|AI rover/i.test(input)) subtopic = "AI Rovers";
-      else if (/telescope|infrared|JWST|James Webb/i.test(input)) subtopic = "Space Telescopes";
-      else if (/marine|biology|ecosystem/i.test(input)) subtopic = "Marine Biology";
-      else if (/seafloor|mapping|scan/i.test(input)) subtopic = "Seafloor Mapping";
-      else if (/ROV|remote vehicle/i.test(input)) subtopic = "ROV Systems";
-      else if (/market report|summary|trend/i.test(input)) subtopic = "Market Reports";
-      else if (/writing|automated|draft/i.test(input)) subtopic = "Automated Writing";
-      else if (/alert|real-time|breaking/i.test(input)) subtopic = "Real-Time Alerts";
-      else if (/portfolio|invest|rebalancing/i.test(input)) subtopic = "Portfolio Optimization";
-      else if (/sentiment|opinion|social media/i.test(input)) subtopic = "Sentiment Analysis";
-      else if (/forecast|prediction|time series/i.test(input)) subtopic = "Time-Series Forecasting";
+      if (/mapping|seafloor|sonar/i.test(input)) subtopic = "Seafloor Mapping";
+      else if (/threat|spyware|malware|phishing|ransomware/i.test(input)) subtopic = "Threat Detection";
+      else if (/portfolio|invest|risk|balance/i.test(input)) subtopic = "Portfolio Optimization";
+      else if (/telescope|jwst|infrared/i.test(input)) subtopic = "Space Telescopes";
+      else if (/real-time|alert|breaking/i.test(input)) subtopic = "Real-Time Alerts";
+      else if (/bim|design|blueprint/i.test(input)) subtopic = "BIM Modeling";
+      else if (/robot|automation|brick/i.test(input)) subtopic = "Construction Robotics";
+      else if (/eco|green|carbon/i.test(input)) subtopic = "Green Building";
+      else if (/forecast|time series/i.test(input)) subtopic = "Stock Forecasting";
+      else if (/sentiment|social media|opinion/i.test(input)) subtopic = "Market Sentiment";
+      else if (/marine biology|ocean life/i.test(input)) subtopic = "Marine Biology";
+      else if (/rover|autonomous/i.test(input)) subtopic = "AI Rovers";
+      else if (/generate|write|automated journalism/i.test(input)) subtopic = "Automated Writing";
 
-      const promptAnswers = {
-        "Cybersecurity-Threat Detection": "AI helps detect threats in cybersecurity by continuously monitoring traffic patterns and using machine learning to flag suspicious behavior such as unauthorized access, malware downloads, or phishing attempts.",
-        "Construction-BIM": "AI enhances BIM by automating clash detection, cost forecasting, and resource scheduling, resulting in fewer design errors and better efficiency in construction.",
-        "Construction-Green Building": "AI optimizes green construction by analyzing environmental data, suggesting low-impact materials, and forecasting long-term energy efficiency of buildings.",
-        "Construction-Construction Robotics": "AI powers construction robots that can automate dangerous or repetitive tasks like rebar tying, welding, and masonry, reducing labor strain and boosting safety.",
-        "Space Exploration-AI Rovers": "AI helps rovers autonomously navigate, analyze rock composition, detect hazards, and make decisions when out of communication with Earth.",
-        "Space Exploration-Space Telescopes": "AI in space telescopes filters noisy data, detects anomalies, and classifies cosmic bodies like galaxies, stars, and exoplanets in real-time.",
-        "Deep Sea Exploration-ROV Systems": "AI allows ROVs to detect obstacles, adjust their paths autonomously, and collect high-resolution imaging from dangerous deep-sea environments.",
-        "Deep Sea Exploration-Seafloor Mapping": "AI interprets sonar and visual data to create accurate 3D topography of the seafloor, helping in geology and oceanography.",
-        "Deep Sea Exploration-Marine Biology": "AI identifies marine species, tracks their behavior, and monitors reef health by analyzing underwater footage and environmental sensors.",
-        "Business News Generation-Market Reports": "AI can extract financial data, earnings results, and trends, then generate plain-language reports for easy understanding by investors.",
-        "Business News Generation-Automated Writing": "AI systems convert structured financial or economic data into readable news articles instantly using Natural Language Generation (NLG).",
-        "Business News Generation-Real-Time Alerts": "AI scans market feeds, SEC filings, and global news sources to alert traders or analysts about major real-time changes.",
-        "Stock Market Prediction-Portfolio Optimization": "AI uses algorithms to optimize asset distribution based on your financial goals, risk profile, and market projections.",
-        "Stock Market Prediction-Sentiment Analysis": "AI scans social media and news platforms to gauge public sentiment, helping predict how it might affect stock performance.",
-        "Stock Market Prediction-Time-Series Forecasting": "AI models use past stock data to forecast future trends, incorporating seasonality, volatility, and external factors like inflation."
-      };
+      // Expanded prompt-to-answer mappings
+      let actualAnswer = "That’s an interesting question. Can you rephrase it?";
 
-      const key = `${industry}-${subtopic}`;
-      const directAnswer = promptAnswers[key] || "That's an interesting topic! AI is making big advances in this area, but I’d need more specifics to give a detailed answer.";
+      const promptMap = [
+        [ /underwater.*mapping/i, "AI helps in underwater mapping by processing sonar and camera data to generate 3D maps of the ocean floor in real time." ],
+        [ /AI.*detect.*malware/i, "AI detects malware using behavior analysis and anomaly detection to catch threats before signature-based tools can." ],
+        [ /AI.*detect.*phishing/i, "AI detects phishing by analyzing email headers, URLs, and user behavior patterns to flag suspicious messages." ],
+        [ /AI.*write.*news/i, "AI uses Natural Language Generation (NLG) to turn structured data like stock reports into readable news instantly." ],
+        [ /optimi[sz]e.*portfolio/i, "AI optimizes portfolios by calculating ideal asset distributions based on risk profiles and market forecasts." ],
+        [ /JWST|James Webb|space.*telescope/i, "AI supports JWST by filtering noise, enhancing imagery, and categorizing cosmic objects efficiently." ],
+        [ /ransomware/i, "AI detects ransomware by spotting unusual file encryption patterns and blocking access before data loss occurs." ],
+        [ /construction.*robot/i, "AI-driven robots assist in repetitive tasks like brick-laying and welding, improving safety and speed on sites." ],
+        [ /green.*building/i, "AI supports green buildings by analyzing energy data, optimizing HVAC usage, and recommending eco materials." ],
+        [ /forecast.*stock/i, "AI forecasts stock prices using time-series models like LSTM, ARIMA, or regression on market trends." ],
+        [ /market.*sentiment/i, "AI uses NLP to analyze social media and news sentiment to predict how markets might react to events." ],
+        [ /real.*time.*alerts/i, "AI provides real-time alerts by monitoring global news feeds and triggering push notifications instantly." ],
+        [ /marine.*biology/i, "AI helps marine biologists by identifying species in underwater footage and tracking ecosystem health over time." ],
+        [ /rover.*autonomous/i, "AI lets rovers navigate Mars independently, avoiding rocks and making decisions without Earth commands." ],
+        [ /bim|3D.*model/i, "AI-enhanced BIM systems detect design conflicts, estimate costs, and optimize construction sequencing." ],
+        [ /automated.*journalism|generate.*article/i, "AI generates news articles by parsing raw data and producing grammatically accurate narratives in seconds." ]
+      ];
 
-      return {
-        industry,
-        subtopic,
-        reply: `Hey ${name}, you’re asking about ${subtopic} in ${industry}. Here's what I can tell you: ${directAnswer}`
-      };
+      for (let [regex, answer] of promptMap) {
+        if (regex.test(input)) {
+          actualAnswer = answer;
+          break;
+        }
+      }
+
+      const finalReply = `Hey ${name}, here's what I found on ${subtopic} in ${industry}: ${actualAnswer}`;
+      return { industry, subtopic, reply: finalReply };
     }
   </script>
 </body>
 </html>
+
 
