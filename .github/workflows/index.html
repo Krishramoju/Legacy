@@ -332,8 +332,230 @@ button:hover {
 </html>
 
 <h2> quiz </h2>
-    
-      
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Multi-Topic Quiz with Leaderboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .quiz-section {
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      max-width: 800px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .question {
+      margin-bottom: 15px;
+    }
+    .question p {
+      margin: 0;
+      font-weight: bold;
+    }
+    .question label {
+      display: block;
+      margin: 5px 0;
+    }
+    #submitBtn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results, .leaderboard {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 20px;
+    }
+    .correct-answer { color: green; }
+    .wrong-answer { color: red; }
+
+    #nameInputSection {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    #nameInput {
+      padding: 8px;
+      font-size: 1rem;
+    }
+    #startBtn {
+      padding: 8px 15px;
+      font-size: 1rem;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Multi-Topic Knowledge Quiz</h1>
+
+  <div id="nameInputSection">
+    <label for="playerName"><strong>Enter your name to begin:</strong></label>
+    <input type="text" id="playerName" placeholder="Your Name" />
+    <button id="startBtn" onclick="startQuiz()">Start Quiz</button>
+  </div>
+
+  <form id="quizForm" class="quiz-section" style="display:none;">
+    <!-- Questions here -->
+    <h2>Cybersecurity</h2>
+    <div class="question">
+      <p>1. What is a common method used in phishing attacks?</p>
+      <label><input type="radio" name="q1" value="a"> Social engineering</label>
+      <label><input type="radio" name="q1" value="b"> Hardware failure</label>
+      <label><input type="radio" name="q1" value="c"> Software upgrade</label>
+    </div>
+
+    <h2>Construction</h2>
+    <div class="question">
+      <p>2. What does BIM stand for?</p>
+      <label><input type="radio" name="q2" value="a"> Building Internal Model</label>
+      <label><input type="radio" name="q2" value="b"> Building Information Modeling</label>
+      <label><input type="radio" name="q2" value="c"> Blueprint Information Management</label>
+    </div>
+
+    <h2>Deep Sea Exploration</h2>
+    <div class="question">
+      <p>3. What is the function of an ROV?</p>
+      <label><input type="radio" name="q3" value="a"> Mapping stars</label>
+      <label><input type="radio" name="q3" value="b"> Deep sea exploration</label>
+      <label><input type="radio" name="q3" value="c"> Building construction</label>
+    </div>
+
+    <h2>Space Exploration</h2>
+    <div class="question">
+      <p>4. What does the James Webb Telescope observe?</p>
+      <label><input type="radio" name="q4" value="a"> Ocean floors</label>
+      <label><input type="radio" name="q4" value="b"> Buildings</label>
+      <label><input type="radio" name="q4" value="c"> Infrared signals in space</label>
+    </div>
+
+    <h2>UI/UX Design</h2>
+    <div class="question">
+      <p>5. Which is a tool commonly used in UI design?</p>
+      <label><input type="radio" name="q5" value="a"> Figma</label>
+      <label><input type="radio" name="q5" value="b"> Google Docs</label>
+      <label><input type="radio" name="q5" value="c"> Blender</label>
+    </div>
+
+    <h2>Business News Generator</h2>
+    <div class="question">
+      <p>6. What is a common topic in business news?</p>
+      <label><input type="radio" name="q6" value="a"> Stock prices</label>
+      <label><input type="radio" name="q6" value="b"> Movie reviews</label>
+      <label><input type="radio" name="q6" value="c"> Cooking recipes</label>
+    </div>
+
+    <h2>Stock Market Prediction</h2>
+    <div class="question">
+      <p>7. What affects stock prices the most?</p>
+      <label><input type="radio" name="q7" value="a"> Market trends and news</label>
+      <label><input type="radio" name="q7" value="b"> Astrological signs</label>
+      <label><input type="radio" name="q7" value="c"> Lucky numbers</label>
+    </div>
+
+    <button type="button" id="submitBtn" onclick="gradeQuiz()">Submit Quiz</button>
+    <div id="results" class="results"></div>
+  </form>
+
+  <div class="leaderboard" id="leaderboard" style="display:none;">
+    <h2>Leaderboard</h2>
+    <ol id="leaderboardList"></ol>
+  </div>
+
+  <script>
+    let player = "";
+
+    function startQuiz() {
+      const nameInput = document.getElementById("playerName").value.trim();
+      if (nameInput === "") {
+        alert("Please enter your name to begin.");
+        return;
+      }
+      player = nameInput;
+      document.getElementById("nameInputSection").style.display = "none";
+      document.getElementById("quizForm").style.display = "block";
+    }
+
+    function gradeQuiz() {
+      const correctAnswers = {
+        q1: "a",
+        q2: "b",
+        q3: "b",
+        q4: "c",
+        q5: "a",
+        q6: "a",
+        q7: "a"
+      };
+
+      let score = 0;
+      let resultsHTML = '<h3>Your Results:</h3>';
+      Object.keys(correctAnswers).forEach((qid, index) => {
+        const selected = document.querySelector(`input[name="${qid}"]:checked`);
+        const questionNumber = index + 1;
+        if (selected) {
+          if (selected.value === correctAnswers[qid]) {
+            score++;
+            resultsHTML += `<p><strong>Q${questionNumber}:</strong> <span class='correct-answer'>Correct</span></p>`;
+          } else {
+            resultsHTML += `<p><strong>Q${questionNumber}:</strong> <span class='wrong-answer'>Incorrect</span> (Correct: ${correctAnswers[qid].toUpperCase()})</p>`;
+          }
+        } else {
+          resultsHTML += `<p><strong>Q${questionNumber}:</strong> <span class='wrong-answer'>No answer selected</span> (Correct: ${correctAnswers[qid].toUpperCase()})</p>`;
+        }
+      });
+
+      resultsHTML += `<p><strong>Final Score: ${score}/7</strong></p>`;
+      document.getElementById("results").innerHTML = resultsHTML;
+      document.getElementById("submitBtn").disabled = true;
+
+      updateLeaderboard(player, score);
+    }
+
+    function updateLeaderboard(name, score) {
+      let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || {};
+
+      if (!leaderboard[name] || leaderboard[name] < score) {
+        leaderboard[name] = score;
+        localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+      }
+
+      showLeaderboard(leaderboard);
+    }
+
+    function showLeaderboard(leaderboardData) {
+      const sorted = Object.entries(leaderboardData).sort((a, b) => b[1] - a[1]);
+      const list = document.getElementById("leaderboardList");
+      list.innerHTML = "";
+
+      sorted.forEach(([name, score]) => {
+        const li = document.createElement("li");
+        li.textContent = `${name}: ${score}/7`;
+        list.appendChild(li);
+      });
+
+      document.getElementById("leaderboard").style.display = "block";
+    }
+  </script>
+</body>
+</html>
+
      
 
       
