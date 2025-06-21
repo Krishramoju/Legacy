@@ -2,6 +2,164 @@
 
 <body>
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Which AI Tool is Right for Me?</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin: 6px 0;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #result {
+      background: #dff9fb;
+      border-left: 5px solid #0984e3;
+      margin-top: 30px;
+      padding: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Which AI Tool is Right for Me?</h1>
+
+<form id="quizForm">
+  <div class="question">
+    <p>1. What field are you working in?</p>
+    <label><input type="radio" name="field" value="cybersecurity"> Cybersecurity</label>
+    <label><input type="radio" name="field" value="space"> Space Exploration</label>
+    <label><input type="radio" name="field" value="deepsea"> Deep Sea Exploration</label>
+    <label><input type="radio" name="field" value="business"> Business News Generation</label>
+    <label><input type="radio" name="field" value="stock"> Stock Market Prediction</label>
+  </div>
+
+  <div class="question">
+    <p>2. What is your budget?</p>
+    <label><input type="radio" name="budget" value="free"> Free</label>
+    <label><input type="radio" name="budget" value="low"> Low (under $50/month)</label>
+    <label><input type="radio" name="budget" value="high"> High (enterprise-level)</label>
+  </div>
+
+  <div class="question">
+    <p>3. Do you need real-time analysis?</p>
+    <label><input type="radio" name="realtime" value="yes"> Yes</label>
+    <label><input type="radio" name="realtime" value="no"> No</label>
+  </div>
+
+  <div class="question">
+    <p>4. Are you comfortable writing code?</p>
+    <label><input type="radio" name="code" value="yes"> Yes, I can code</label>
+    <label><input type="radio" name="code" value="no"> No, I prefer no-code tools</label>
+  </div>
+
+  <div class="question">
+    <p>5. What's your priority?</p>
+    <label><input type="radio" name="priority" value="accuracy"> Accuracy & depth</label>
+    <label><input type="radio" name="priority" value="speed"> Speed & automation</label>
+    <label><input type="radio" name="priority" value="visual"> Visual dashboards</label>
+  </div>
+
+  <button type="button" onclick="getRecommendation()">Get My AI Tool</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+function getRecommendation() {
+  const form = document.forms['quizForm'];
+  const field = form['field'].value;
+  const budget = form['budget'].value;
+  const realtime = form['realtime'].value;
+  const code = form['code'].value;
+  const priority = form['priority'].value;
+
+  let result = "🔍 Based on your choices, we recommend:\n\n";
+
+  if (!field || !budget || !realtime || !code || !priority) {
+    document.getElementById('result').innerText = "⚠️ Please answer all questions before getting a recommendation.";
+    return;
+  }
+
+  // Match logic
+  if (field === "cybersecurity") {
+    if (realtime === "yes" && budget === "high") {
+      result += "🛡️ **Darktrace AI** – Enterprise-grade real-time threat detection with self-learning.\n";
+    } else if (code === "yes") {
+      result += "💻 **Snort + GPT API** – Build your own AI-driven detection scripts.\n";
+    } else {
+      result += "🔐 **CrowdStrike Falcon Lite** – Lightweight, intuitive UI for non-coders.\n";
+    }
+  } else if (field === "space") {
+    if (priority === "accuracy") {
+      result += "🚀 **COSMIC AI by NASA** – Deep modeling for space mission analysis.\n";
+    } else if (budget === "low") {
+      result += "🌌 **ESA OPS-SAT AI Kit** – Open satellite testing platform with AI capabilities.\n";
+    } else {
+      result += "🛰️ **Planet SkySat + AI** – For visual Earth observation via ML pipelines.\n";
+    }
+  } else if (field === "deepsea") {
+    if (code === "yes") {
+      result += "🌊 **NVIDIA Jetson + PyTorch** – Build real-time AI perception systems for underwater robotics.\n";
+    } else {
+      result += "🦈 **BlueROV2 AI Console** – GUI-based control with marine object detection.\n";
+    }
+  } else if (field === "business") {
+    if (budget === "free") {
+      result += "📰 **Notion AI + Feedly AI** – Smart writing and AI-curated business articles.\n";
+    } else if (priority === "speed") {
+      result += "⚡ **Jasper AI** – Generate market reports in seconds.\n";
+    } else {
+      result += "📊 **MarketMuse + Narrative Science** – AI-driven narrative and analysis dashboards.\n";
+    }
+  } else if (field === "stock") {
+    if (code === "yes" && realtime === "yes") {
+      result += "📈 **Alpaca API + Python** – Build real-time predictive trading bots.\n";
+    } else if (priority === "visual") {
+      result += "📊 **Tradytics or Tickeron** – AI-powered dashboards for traders.\n";
+    } else if (budget === "free") {
+      result += "💸 **Yahoo Finance AI Plugins + ChatGPT** – Basic forecasting and insight tools.\n";
+    } else {
+      result += "🧠 **Kavout AI** – Uses K Score for smart asset analysis (enterprise-level).\n";
+    }
+  } else {
+    result = "⚠️ Something went wrong. Please try again.";
+  }
+
+  document.getElementById('result').innerHTML = result.replace(/\n/g, "<br>");
+}
+</script>
+
+</body>
+</html>
+
+
+
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>
