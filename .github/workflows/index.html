@@ -5,6 +5,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <title>AI Tool Comparator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    .input-section {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 200px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    .results {
+      display: flex;
+      justify-content: space-around;
+      gap: 40px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .tool-box {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 45%;
+      min-width: 280px;
+    }
+
+    .tool-box h2 {
+      margin-top: 0;
+      color: #34495e;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .not-found {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🆚 AI Tool Comparator</h1>
+
+<div class="input-section">
+  <input type="text" id="tool1" placeholder="Enter AI Tool 1" />
+  <input type="text" id="tool2" placeholder="Enter AI Tool 2" />
+  <button onclick="compareTools()">Compare</button>
+</div>
+
+<div class="results">
+  <div class="tool-box" id="result1"></div>
+  <div class="tool-box" id="result2"></div>
+</div>
+
+<script>
+const toolData = {
+  "orca ai": {
+    name: "ORCA AI",
+    features: [
+      "Marine collision detection",
+      "Real-time visual processing",
+      "Supports autonomous ships"
+    ]
+  },
+  "bluerov2": {
+    name: "BlueROV2 + Jetson Nano",
+    features: [
+      "Underwater computer vision",
+      "Supports custom Python ML models",
+      "Marine biology and wreck mapping"
+    ]
+  },
+  "seamate ai": {
+    name: "SEAMate AI",
+    features: [
+      "Voice-based marine assistant",
+      "NLP on logs and weather feeds",
+      "Smart navigation planning"
+    ]
+  },
+  "nautiluslive": {
+    name: "NautilusLive Mapping Bot",
+    features: [
+      "Deep-sea AI mapping",
+      "Reinforcement learning-based",
+      "Prioritizes seafloor regions"
+    ]
+  },
+  "cimon": {
+    name: "CIMON",
+    features: [
+      "Astronaut assistant on ISS",
+      "Facial recognition & NLP",
+      "Stress monitoring"
+    ]
+  },
+  "cosmic ai": {
+    name: "COSMIC AI",
+    features: [
+      "Satellite weather modeling",
+      "GPS radio occultation analysis",
+      "Real-time climate improvement"
+    ]
+  },
+  "spheres ai": {
+    name: "SPHERES AI",
+    features: [
+      "Micro-satellite autonomy",
+      "Formation flying",
+      "Indoor navigation on ISS"
+    ]
+  },
+  "aegis": {
+    name: "AEGIS (NASA Mars Rover)",
+    features: [
+      "Auto target selection",
+      "Rover autonomy",
+      "Geology-based computer vision"
+    ]
+  },
+  "kavout": {
+    name: "Kavout K Score",
+    features: [
+      "Neural stock scoring",
+      "Earnings + sentiment analysis",
+      "Bullish/Bearish classification"
+    ]
+  },
+  "tradytics": {
+    name: "Tradytics",
+    features: [
+      "Retail trading dashboard",
+      "ML prediction on options flow",
+      "Automated alerts"
+    ]
+  },
+  "equbot": {
+    name: "EquBot AI ETF",
+    features: [
+      "Automated portfolio management",
+      "Earnings calls NLP",
+      "SEC document analysis"
+    ]
+  },
+  "kensho": {
+    name: "Kensho AI",
+    features: [
+      "Real-time finance query engine",
+      "Used by S&P Global",
+      "Structured event processing"
+    ]
+  },
+  "alpaca": {
+    name: "Alpaca AI API",
+    features: [
+      "Auto trading API",
+      "Supports custom AI models",
+      "Python & REST integration"
+    ]
+  },
+  "bloomberggpt": {
+    name: "BloombergGPT",
+    features: [
+      "LLM trained on financial corpus",
+      "Summarizes news & earnings",
+      "Advanced question answering"
+    ]
+  },
+  "primer ai": {
+    name: "Primer AI",
+    features: [
+      "Government & news summarization",
+      "Used by military analysts",
+      "Document clustering & parsing"
+    ]
+  },
+  "marketmuse": {
+    name: "MarketMuse",
+    features: [
+      "AI content optimization",
+      "Keyword/topic generation",
+      "Business content authority scoring"
+    ]
+  },
+  "copy.ai": {
+    name: "Copy.ai",
+    features: [
+      "Auto PR & LinkedIn post creation",
+      "Marketing-focused generation",
+      "GPT-based templates"
+    ]
+  },
+  "darktrace": {
+    name: "Darktrace",
+    features: [
+      "Self-learning enterprise defense",
+      "Insider threat detection",
+      "Autonomous response"
+    ]
+  },
+  "crowdstrike": {
+    name: "CrowdStrike Falcon",
+    features: [
+      "Endpoint behavior analysis",
+      "Threat intel integration",
+      "Real-time response"
+    ]
+  },
+  "vectra ai": {
+    name: "Vectra AI",
+    features: [
+      "Identity breach prevention",
+      "Account takeover detection",
+      "Cloud integration"
+    ]
+  },
+  "microsoft defender": {
+    name: "Microsoft Defender AI",
+    features: [
+      "Email phishing detection",
+      "Adaptive firewall logic",
+      "Microsoft ecosystem integration"
+    ]
+  },
+  "google chronicle": {
+    name: "Google Chronicle AI",
+    features: [
+      "Petabyte-scale threat search",
+      "Long-term log analytics",
+      "Cloud-native detection"
+    ]
+  }
+};
+
+function compareTools() {
+  const t1 = document.getElementById("tool1").value.trim().toLowerCase();
+  const t2 = document.getElementById("tool2").value.trim().toLowerCase();
+
+  const tool1 = toolData[t1];
+  const tool2 = toolData[t2];
+
+  const r1 = document.getElementById("result1");
+  const r2 = document.getElementById("result2");
+
+  if (!tool1) {
+    r1.innerHTML = `<p class="not-found">Tool "${t1}" not found.</p>`;
+  } else {
+    r1.innerHTML = `<h2>${tool1.name}</h2><ul>${tool1.features.map(f => `<li>${f}</li>`).join("")}</ul>`;
+  }
+
+  if (!tool2) {
+    r2.innerHTML = `<p class="not-found">Tool "${t2}" not found.</p>`;
+  } else {
+    r2.innerHTML = `<h2>${tool2.name}</h2><ul>${tool2.features.map(f => `<li>${f}</li>`).join("")}</ul>`;
+  }
+}
+</script>
+
+</body>
+</html>
+
+
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8" />
   <title>AI Tools Virtual Museum</title>
   <style>
