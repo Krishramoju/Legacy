@@ -1,6 +1,117 @@
 <html>
 
 <body>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ask AI Researchers</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .questions {
+      margin-top: 30px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .question-entry {
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Ask AI Researchers</h2>
+  <form id="questionForm">
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" required>
+
+    <label for="email">Your Email:</label>
+    <input type="email" id="email" required>
+
+    <label for="question">Your Question:</label>
+    <textarea id="question" required></textarea>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <div class="questions" id="questions">
+    <h3>Submitted Questions</h3>
+    <div id="questionList"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("questionForm");
+    const questionList = document.getElementById("questionList");
+
+    // Load existing questions from localStorage
+    const storedQuestions = JSON.parse(localStorage.getItem("aiQuestions") || "[]");
+    storedQuestions.forEach(showQuestion);
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const question = document.getElementById("question").value;
+
+      const entry = { name, email, question };
+      storedQuestions.push(entry);
+      localStorage.setItem("aiQuestions", JSON.stringify(storedQuestions));
+
+      showQuestion(entry);
+
+      form.reset();
+    });
+
+    function showQuestion(entry) {
+      const div = document.createElement("div");
+      div.className = "question-entry";
+      div.innerHTML = `<strong>${entry.name}</strong> (${entry.email})<br>${entry.question}`;
+      questionList.appendChild(div);
+    }
+  </script>
+
+</body>
+</html>
+
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>
