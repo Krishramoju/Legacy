@@ -858,6 +858,153 @@ renderExamples();
   <meta charset="UTF-8">
   <title>This Tool Replaced… (Expanded)</title>
   <style>
+    body {
+    font-family: 'Inter', 'Segoe UI', -apple-system, sans-serif;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    padding: 40px;
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+h1 {
+    text-align: center;
+    color: #1e293b;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    position: relative;
+    letter-spacing: -0.5px;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+
+.tool-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 50px;
+    padding: 0 20px;
+}
+
+.tool-card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid rgba(226, 232, 240, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, #6366f1, #8b5cf6);
+    transition: width 0.3s ease;
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+.tool-card:hover::before {
+    width: 8px;
+}
+
+.tool-card h3 {
+    margin: 0 0 10px 0;
+    color: #1e293b;
+    font-size: 1.25rem;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+}
+
+#popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#popupContent {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    transform: scale(0.95);
+    animation: popIn 0.3s ease forwards;
+    position: relative;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+@keyframes popIn {
+    to { transform: scale(1); }
+}
+
+#popupContent h2 {
+    margin-top: 0;
+    color: #1e293b;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+#popupContent p {
+    color: #64748b;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+#closePopup {
+    margin-top: 30px;
+    padding: 12px 30px;
+    background: linear-gradient(90deg, #ef4444, #dc2626);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(239, 68, 68, 0.2);
+}
+
+#closePopup:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(239, 68, 68, 0.3);
+}
     
   </style>
 </head>
@@ -1055,78 +1202,7 @@ tools.forEach(tool => {
   <meta charset="UTF-8">
   <title>AI Tool Comparator</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f4f8;
-      margin: 0;
-      padding: 40px;
-    }
 
-    h1 {
-      text-align: center;
-      color: #2c3e50;
-    }
-
-    .input-section {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-    }
-
-    input[type="text"] {
-      padding: 10px;
-      font-size: 16px;
-      width: 200px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background: #3498db;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #2980b9;
-    }
-
-    .results {
-      display: flex;
-      justify-content: space-around;
-      gap: 40px;
-      margin-top: 30px;
-      flex-wrap: wrap;
-    }
-
-    .tool-box {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      width: 45%;
-      min-width: 280px;
-    }
-
-    .tool-box h2 {
-      margin-top: 0;
-      color: #34495e;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    .not-found {
-      color: red;
-      font-weight: bold;
-    }
   </style>
 </head>
 <body>
