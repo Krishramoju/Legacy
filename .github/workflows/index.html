@@ -4097,7 +4097,115 @@ button:hover {
 </section>
 
 <style>
+#deepsea-chatbot {
+    background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+    border-top: 2px solid #00838f;
+    padding: 30px;
+    font-family: 'Inter', 'Segoe UI', -apple-system, sans-serif;
+}
 
+#deepsea-chatbox {
+    max-width: 650px;
+    margin: auto;
+    background: #ffffff;
+    border: 1px solid #80deea;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(0, 131, 143, 0.1);
+}
+
+#deepsea-log {
+    height: 320px;
+    overflow-y: auto;
+    background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid #4db6ac;
+    scrollbar-width: thin;
+    scrollbar-color: #00796b #b2dfdb;
+}
+
+#deepsea-log::-webkit-scrollbar {
+    width: 8px;
+}
+
+#deepsea-log::-webkit-scrollbar-track {
+    background: #b2dfdb;
+    border-radius: 10px;
+}
+
+#deepsea-log::-webkit-scrollbar-thumb {
+    background-color: #00796b;
+    border-radius: 10px;
+}
+
+.deepsea-msg {
+    margin: 12px 0;
+    padding: 14px 18px;
+    border-radius: 14px;
+    max-width: 80%;
+    position: relative;
+    animation: floatUp 0.4s ease;
+    line-height: 1.6;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+@keyframes floatUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.deepsea-user {
+    background: linear-gradient(135deg, #b2ebf2, #80deea);
+    margin-left: auto;
+    border-bottom-right-radius: 4px;
+    border: 1px solid #4dd0e1;
+}
+
+.deepsea-bot {
+    background: linear-gradient(135deg, #c8e6c9, #a5d6a7);
+    margin-right: auto;
+    border-bottom-left-radius: 4px;
+    border: 1px solid #81c784;
+}
+
+#deepsea-input {
+    width: 78%;
+    padding: 14px 18px;
+    border: 1px solid #b2dfdb;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: #e8f5e9;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+#deepsea-input:focus {
+    outline: none;
+    border-color: #00796b;
+    box-shadow: 0 0 0 3px rgba(0, 121, 107, 0.2);
+    background: #ffffff;
+}
+
+#deepsea-form button {
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #00796b, #00695c);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 121, 107, 0.2);
+}
+
+#deepsea-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 121, 107, 0.3);
+    background: linear-gradient(135deg, #00695c, #004d40);
+}
 </style>
 
 <script>
