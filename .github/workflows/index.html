@@ -444,7 +444,102 @@ h1::after {
   <meta charset="UTF-8" />
   <title>Ask AI Researchers</title>
   <style>
-    
+    body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    padding: 30px;
+    max-width: 600px;
+    margin: 40px auto;
+    color: #2d3748;
+    line-height: 1.6;
+}
+
+h2 {
+    text-align: center;
+    color: #1a365d;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    letter-spacing: -0.5px;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #4299e1, #667eea);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+label {
+    display: block;
+    margin-top: 20px;
+    font-weight: 500;
+    color: #4a5568;
+    font-size: 15px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 8px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    font-family: inherit;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #90cdf4;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+}
+
+button {
+    margin-top: 25px;
+    padding: 14px;
+    width: 100%;
+    background: linear-gradient(90deg, #4299e1, #667eea);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(66, 153, 225, 0.2);
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(66, 153, 225, 0.25);
+}
+
+.questions {
+    margin-top: 35px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.question-entry {
+    margin-bottom: 18px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.question-entry:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+    </style> 
 </head>
 <body>
 
@@ -509,80 +604,7 @@ h1::after {
   <meta charset="UTF-8">
   <title>🔬 Prompt Surgery Lab</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f2f5;
-      padding: 40px;
-    }
-    h1 {
-      text-align: center;
-      color: #2c3e50;
-    }
-    .prompt-section {
-      margin: 30px auto;
-      max-width: 900px;
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    .field {
-      font-weight: bold;
-      color: #2980b9;
-      margin-bottom: 10px;
-    }
-    .bad {
-      background: #ffdddd;
-      padding: 10px;
-      border-left: 5px solid #e74c3c;
-    }
-    .why-bad {
-      font-style: italic;
-      color: #c0392b;
-    }
-    .fixed {
-      background: #ddffdd;
-      padding: 10px;
-      border-left: 5px solid #27ae60;
-      margin-top: 10px;
-    }
-    .response {
-      background: #e8f6ff;
-      padding: 10px;
-      border-left: 5px solid #3498db;
-      margin-top: 10px;
-      color: #2c3e50;
-    }
-    .divider {
-      margin: 30px 0;
-      border-top: 2px dashed #ccc;
-    }
-    .interactive {
-      background: #fff7e6;
-      border-left: 5px solid #f39c12;
-      padding: 20px;
-      margin-top: 40px;
-    }
-    .interactive textarea {
-      width: 100%;
-      height: 80px;
-      margin-bottom: 10px;
-    }
-    .interactive button {
-      padding: 10px 20px;
-      background-color: #2980b9;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .interactive-response {
-      margin-top: 20px;
-      padding: 10px;
-      background: #ecf0f1;
-      border-left: 5px solid #7f8c8d;
-    }
-  </style>
+    
 </head>
 <body>
 
