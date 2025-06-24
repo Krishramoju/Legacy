@@ -7311,51 +7311,101 @@ button:hover {
   <meta charset="UTF-8">
   <title>Simulation AI Scenario Bot</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0; padding: 0;
-      background: #eef2f5;
-    }
-    h1 {
-      background: #2c3e50;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-    }
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 1rem;
-      padding: 1rem;
-    }
-    .bot-card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      padding: 1rem;
-    }
-    textarea {
-      width: 100%;
-      height: 60px;
-      margin-top: 0.5rem;
-      padding: 0.5rem;
-    }
-    button {
-      margin-top: 0.5rem;
-      background: #2980b9;
-      color: white;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .response {
-      margin-top: 0.5rem;
-      background: #f4f6f8;
-      padding: 0.5rem;
-      border-radius: 5px;
-      min-height: 50px;
-    }
+  body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #e9edf1;
+  color: #2c3e50;
+}
+
+/* Page Title */
+h1 {
+  background: linear-gradient(to right, #2c3e50, #3e536b);
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin: 0;
+}
+
+/* Card Grid Container */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Bot Card */
+.bot-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bot-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Textarea */
+textarea {
+  width: 100%;
+  height: 70px;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  resize: vertical;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  background: #fcfcfc;
+}
+
+textarea:focus {
+  border-color: #2980b9;
+  box-shadow: 0 0 6px rgba(41, 128, 185, 0.3);
+  outline: none;
+}
+
+/* Button */
+button {
+  margin-top: 1rem;
+  background: #2980b9;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #1f6391;
+}
+
+/* Response Box */
+.response {
+  margin-top: 1rem;
+  background: #f4f6f8;
+  padding: 1rem;
+  border-radius: 8px;
+  min-height: 60px;
+  font-size: 0.95rem;
+  color: #34495e;
+  line-height: 1.5;
+}
+  
   </style>
 </head>
 <body>
@@ -7578,29 +7628,55 @@ button:hover {
   <meta charset="UTF-8">
   <title>Why Using AI Tools is Better</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f0f4f8;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-      color: #2a4d69;
-    }
-    section {
-      background: white;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #4b86b4;
-    }
-    p {
-      line-height: 1.6;
-    }
+   body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #eef3f8;
+  margin: 0;
+  padding: 30px 20px;
+  color: #2c3e50;
+}
+
+/* Main Heading */
+h1 {
+  text-align: center;
+  color: #2a4d69;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Section Container */
+section {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* Section Heading */
+h2 {
+  color: #4b86b4;
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+/* Paragraph */
+p {
+  line-height: 1.7;
+  font-size: 1.05rem;
+  color: #444;
+  margin-top: 10px;
+}
+ 
   </style>
 </head>
 <body>
@@ -7653,28 +7729,50 @@ button:hover {
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AI Terms Glossary</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      background: #f7f7f7;
-      padding: 20px;
-    }
-    h1, h2 {
-      color: #333;
-    }
-    .category {
-      background: #fff;
-      border: 1px solid #ccc;
-      border-left: 5px solid #007bff;
-      margin-bottom: 20px;
-      padding: 15px;
-    }
-    .term {
-      margin-bottom: 10px;
-    }
-    .term strong {
-      color: #007bff;
-    }
+ body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  line-height: 1.7;
+  background: #f0f2f5;
+  padding: 30px;
+  color: #2c3e50;
+}
+
+/* Headings */
+h1, h2 {
+  color: #1f2d3d;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Category Block */
+.category {
+  background: #ffffff;
+  border-left: 6px solid #3498db;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  padding: 20px 25px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.category:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Term Block */
+.term {
+  margin-bottom: 14px;
+  font-size: 1.05rem;
+}
+
+/* Highlighted Term */
+.term strong {
+  color: #3498db;
+  font-weight: 600;
+}
+
   </style>
 </head>
 <body>
@@ -7756,33 +7854,60 @@ button:hover {
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AI Terms Glossary & Regulatory Compliance</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      background: #f7f7f7;
-      padding: 20px;
-    }
-    h1, h2 {
-      color: #333;
-    }
-    .category {
-      background: #fff;
-      border: 1px solid #ccc;
-      border-left: 5px solid #007bff;
-      margin-bottom: 20px;
-      padding: 15px;
-    }
-    .term {
-      margin-bottom: 10px;
-    }
-    .term strong {
-      color: #007bff;
-    }
-    .subheading {
-      margin-top: 20px;
-      font-weight: bold;
-      color: #555;
-    }
+ body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  line-height: 1.7;
+  background: #eef1f5;
+  padding: 30px;
+  color: #2c3e50;
+}
+
+/* Headings */
+h1, h2 {
+  color: #1e2e3e;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Category Box */
+.category {
+  background: #ffffff;
+  border-left: 6px solid #007bff;
+  border-radius: 8px;
+  padding: 20px 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.category:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Individual Term */
+.term {
+  margin-bottom: 14px;
+  font-size: 1.05rem;
+}
+
+/* Highlighted Keyword */
+.term strong {
+  color: #007bff;
+  font-weight: 600;
+}
+
+/* Subheading Text */
+.subheading {
+  margin-top: 25px;
+  font-weight: 600;
+  color: #5a5a5a;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
+}
+   
   </style>
 </head>
 <body>
@@ -7880,49 +8005,105 @@ button:hover {
   <meta charset="UTF-8" />
   <title>Truly Smart AI Chatbot (Expanded Prompt Handling)</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f2f5;
-      padding: 20px;
-    }
-    .container {
-      max-width: 900px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .chatbox {
-      border: 1px solid #ccc;
-      background: #fafafa;
-      padding: 15px;
-      height: 300px;
-      overflow-y: auto;
-      margin-bottom: 15px;
-    }
-    .input-section input, .input-section button {
-      font-size: 1rem;
-      padding: 10px;
-      margin-top: 10px;
-      width: 100%;
-    }
-    .message { margin: 8px 0; }
-    .user { color: #007bff; }
-    .bot { color: #28a745; }
-    .analytics {
-      background: #f4f4f4;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-    .analytics ul {
-      padding: 0;
-      list-style: none;
-    }
-    .analytics li {
-      margin: 5px 0;
-    }
+   body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #e8ecf1;
+  padding: 30px;
+  color: #2c3e50;
+}
+
+/* Chat Container */
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* Chatbox Styling */
+.chatbox {
+  border: 1px solid #d0d7de;
+  background: #f9f9f9;
+  padding: 20px;
+  height: 320px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.04);
+}
+
+/* Message Appearance */
+.message {
+  margin: 10px 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.user {
+  color: #007bff;
+  font-weight: 600;
+}
+
+.bot {
+  color: #28a745;
+  font-weight: 600;
+}
+
+/* Input Section */
+.input-section input,
+.input-section button {
+  font-size: 1rem;
+  padding: 12px;
+  margin-top: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-section input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+.input-section button {
+  background: #007bff;
+  color: white;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+}
+
+.input-section button:hover {
+  background: #0056b3;
+}
+
+/* Analytics Panel */
+.analytics {
+  background: #f4f7fa;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccd6dd;
+  margin-top: 25px;
+}
+
+.analytics ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.analytics li {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+ 
   </style>
 </head>
 <body>
